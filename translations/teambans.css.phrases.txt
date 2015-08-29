@@ -1,0 +1,194 @@
+"Phrases"
+{
+	"T"
+	{
+		"en"		"T"
+		"de"		"T"
+	}
+	"CT"
+	{
+		"en"		"CT"
+		"de"		"CT"
+	}
+	
+	"TeamBanned"
+	{
+		"#format"	"{1:s},{2:d},{3:s}"
+		"en"		"{1} You are still banned from {firebrick}{3} team{white}! Remaining: {firebrick}{2} minutes" 
+		"de"		"{1} Sie sind noch {firebrick}{2} Minuten {white}vom {firebrick}{3} Team {white}gebannt!"
+	}
+
+	"TeamBannedPerma"
+	{
+		"#format"	"{1:s},{2:s}"
+		"en"		"{1} You are {firebrick}permanently {white}banned from the {firebrick}{2} team{white}!"
+		"de"		"{1} Sie sind {firebrick}permanent {white}vom {firebrick}{2} Team {white}gebannt!"
+	}
+
+	"Invalid"
+	{
+		"en"		"Target player is invalid!"
+		"de"		"Ungültiger Spieler!"
+	}
+
+	"IsAlreadyCTBanned"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Target player already has a {firebrick}CT Ban{white}!"
+		"de"		"{1} Der ausgewählte Spieler ist bereits vom {firebrick}CT Team {white}gebannt!"
+	}
+	
+	"IsAlreadyTBanned"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Target player already has a {firebrick}T Ban{white}!"
+		"de"		"{1} Der ausgewählte Spieler ist bereits vom {firebrick}T Team {white}gebannt!"
+	}
+
+	"IsntCTBanned"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Target player is not {firebrick}CT Banned{white}!"
+		"de"		"{1} Der ausgewählte Spieler hat kein {firebrick}CT Ban{white}!"
+	}
+	
+	"IsntTBanned"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Target player is not {firebrick}T Banned{white}!"
+		"de"		"{1} Der ausgewählte Spieler hat kein {firebrick}T Ban{white}!"
+	}
+
+	"TeamBansList"
+	{
+		"en"		"Team banned players"
+		"de"		"Team gebannte Spieler"
+	}
+	
+	"TeamBansListPlayer"
+	{
+		"#format"	"{1:s},{2:N},{3:d},{4:d}"
+		"en"		"[{1}] {2} ({3}/{4})"
+		"de"		"[{1}] {2} ({3}/{4})"
+	}
+
+	"TeamBansListPlayerPerma"
+	{
+		"#format"	"{1:s},{2:N}"
+		"en"		"[{1}] {2} (permanently)"
+		"de"		"[{1}] {2} (permanent)"
+	}
+
+	"CTBanSyntax"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Usage: {firebrick}sm_ctban <#userid|name> {white}[length (minutes)] [reason]"
+		"en"		"{1} Benutzung: {firebrick}sm_ctban <#userID|Name> {white}[Laenge (Minuten)] [Grund]"
+	}
+
+	"CTUnBanSyntax"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Usage: {firebrick}sm_ctunban <#userid|name>"
+		"de"		"{1} Benutzung: {firebrick}sm_ctunban <#userID|Name>"
+	}
+	
+	"TBanSyntax"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Usage: {firebrick}sm_tban <#userid|name> {white}[length (minutes)] [reason]"
+		"en"		"{1} Benutzung: {firebrick}sm_tban <#userID|Name> {white}[Laenge (Minuten)] [Grund]"
+	}
+
+	"TUnBanSyntax"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Usage: {firebrick}sm_tunban <#userid|name>"
+		"de"		"{1} Benutzung: {firebrick}sm_tunban <#userID|Name>"
+	}
+
+	"OnTeamBan"
+	{
+		"#format"	"{1:N},{2:s},{3:d},{4:s}"
+		"en"		"{firebrick}{1} {white}was banned from the {firebrick}{2} team{white}! (Length is {firebrick}{3} minutes {white}with the reason: {firebrick}{4}{white})"
+		"de"		"{firebrick}{1} {white}wurde vom {firebrick}{2} Team {white}gebannt! (Länge beträgt {firebrick}{3} Minuten {white}mit dem Grund: {firebrick}{4}{white})"
+	}
+
+	"OnTeamBanPerma"
+	{
+		"#format"	"{1:N},{2:s},{3:s}"
+		"en"		"{firebrick}{1} {white}was {firebrick}permanently {white}banned from the {firebrick}{2} team{white}! (Reason: {firebrick}{3}{white})"
+		"de"		"{firebrick}{1} {white}wurde {firebrick}permanent {white}vom {firebrick}{2} Team {white}gebannt! (Grund: {firebrick}{3}{white})"
+	}
+
+	"OnTeamUnBan"
+	{
+		"#format"	"{1:N},{2:d},{3:s},{4:s}"
+		"en"		"{firebrick}{4} Ban {white}of {firebrick}{1} {white}was removed! (Length was {firebrick}{2} minutes {white}with the reason: {firebrick}{3}{white})"
+		"de"		"Der {firebrick}{4} Ban {white}von {firebrick}{1} {white}wurde entfernt! (Länge betrug {firebrick}{2} Minuten {white}mit dem Grund: {firebrick}{3}{white})"
+	}
+
+	"OnTeamUnBanPerma"
+	{
+		"#format"	"{1:N},{2:s},{3:s}"
+		"en"		"{firebrick}{3} Ban {white}of {firebrick}{1} {white}was removed! (Length was {firebrick}permanently {white}with the reason: {firebrick}{2}{white})"
+		"de"		"Der {firebrick}{3} Ban {white}von {firebrick}{1} {white}wurde entfernt! (Länge war {firebrick}permanent {white}mit dem Grund: {firebrick}{2}{white})"
+	}
+
+	"TeamBansInfo"
+	{
+		"#format"	"{1:s},{2:N},{3:d},{4:d},{5:s},{6:s}"
+		"en"		"{1} {firebrick}{2} {white}was banned for {firebrick}{3} minutes {white}from the {firebrick}{6} team{white}! Remaining: {firebrick}{4} minutes {white}Reason: {firebrick}{5}"
+		"de"		"{1} {firebrick}{2} {white}wurde für {firebrick}{3} Minuten {white}vom {{firebrick}6} Team{white} gebannt! Verbleibend: {firebrick}{4} Minuten {white}Grund: {firebrick}{5}"
+	}
+
+	"TeamBansInfoPerma"
+	{
+		"#format"	"{1:s},{2:N},{3:s},{4:s}"
+		"en"		"{1} {firebrick}{2} {white}was {firebrick}permanently {white}banned from the {firebrick}{4} team{white}! (Reason: {firebrick}{3}{white})"
+		"de"		"{1} {firebrick}{2} {white}wurde {firebrick}permanent {white}vom {firebrick}{4} Team {white}gebannt! (Grund: {firebrick}{3}{white})"
+	}
+
+	"NoReason"
+	{
+		"en"		"No reason"
+		"de"		"Kein Grund"
+	}
+
+	"NoPlayers"
+	{
+		"en"		"no player with team ban"
+		"de"		"kein Spieler mit einen Team Ban gefunden"
+	}
+	
+	"DefaultReason"
+	{
+		"en"		"no Reason"
+		"de"		"kein Grund"
+	}
+	
+	"TeamBansTitle"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Ban"
+		"de"		"{1} Ban"
+	}
+	
+	"SelectPlayer"
+	{
+		"en"		"Select a player"
+		"de"		"Wähle ein Spieler"
+	}
+	
+	"SelectLength"
+	{
+		"en"		"Select a length"
+		"de"		"Wähle eine Länge"
+	}
+	
+	"SelectReason"
+	{
+		"en"		"Select a reason"
+		"de"		"Wähle ein Grund"
+	}
+}
