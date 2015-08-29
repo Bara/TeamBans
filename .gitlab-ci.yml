@@ -1,0 +1,12 @@
+TeamBans:
+  script:
+    - wget http://www.sourcemod.net/smdrop/1.8/$SOURCEMOD_FILE
+    - tar xzf $SOURCEMOD_FILE
+    - git clone https://github.com/Bara20/Multi-Colors.git multicolors
+    - cp -Ru multicolors/addons/sourcemod/scripting/include/ addons/sourcemod/scripting/
+    - rm -r multicolors
+    - cp -Ru scripting/ addons/sourcemod/
+    - cd addons/sourcemod/scripting/
+    - chmod +x spcomp
+    - ./spcomp teambans.sp
+    - ls *.smx
