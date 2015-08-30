@@ -1,4 +1,4 @@
-[CS:S/CS:GO] TeamBans [![build status](http://ci.git.tf/projects/2/status.png?ref=master)](http://ci.git.tf/projects/2?ref=master)
+[CS:S/CS:GO] TeamBans [![build status](http://ci.git.tf/projects/7/status.png?ref=master)](http://ci.git.tf/projects/7?ref=master)
 ---
 [TeamBans on Git.TF](http://git.tf/Bara/TeamBans)
 
