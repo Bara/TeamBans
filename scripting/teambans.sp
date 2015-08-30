@@ -55,8 +55,8 @@ public void OnPluginStart()
 	RegAdminCmd("sm_ctban", Command_SetCTBan, ADMFLAG_BAN);
 	RegAdminCmd("sm_tban", Command_SetTBan, ADMFLAG_BAN);
 	
-	RegAdminCmd("sm_ctunban", Command_DelCTBan, ADMFLAG_BAN);
-	RegAdminCmd("sm_tunban", Command_DelTBan, ADMFLAG_BAN);
+	RegAdminCmd("sm_ctunban", Command_DelCTBan, ADMFLAG_UNBAN);
+	RegAdminCmd("sm_tunban", Command_DelTBan, ADMFLAG_UNBAN);
 
 	AddCommandListener(Command_JoinTeam, "jointeam");
 	
