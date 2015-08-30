@@ -83,7 +83,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"{1} Usage: {darkred}sm_ctban <#userid|name> {lightgreen}[length (minutes)] [reason]"
-		"en"		"{1} Benutzung: {darkred}sm_ctban <#userID|Name> {lightgreen}[Laenge (Minuten)] [Grund]"
+		"de"		"{1} Benutzung: {darkred}sm_ctban <#userID|Name> {lightgreen}[Laenge (Minuten)] [Grund]"
 	}
 
 	"CTUnBanSyntax"
@@ -97,7 +97,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"{1} Usage: {darkred}sm_tban <#userid|name> {lightgreen}[length (minutes)] [reason]"
-		"en"		"{1} Benutzung: {darkred}sm_tban <#userID|Name> {lightgreen}[Laenge (Minuten)] [Grund]"
+		"de"		"{1} Benutzung: {darkred}sm_tban <#userID|Name> {lightgreen}[Laenge (Minuten)] [Grund]"
 	}
 
 	"TUnBanSyntax"

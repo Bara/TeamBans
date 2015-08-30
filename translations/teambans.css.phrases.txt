@@ -83,7 +83,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"{1} Usage: {firebrick}sm_ctban <#userid|name> {white}[length (minutes)] [reason]"
-		"en"		"{1} Benutzung: {firebrick}sm_ctban <#userID|Name> {white}[Laenge (Minuten)] [Grund]"
+		"de"		"{1} Benutzung: {firebrick}sm_ctban <#userID|Name> {white}[Laenge (Minuten)] [Grund]"
 	}
 
 	"CTUnBanSyntax"
@@ -97,7 +97,7 @@
 	{
 		"#format"	"{1:s}"
 		"en"		"{1} Usage: {firebrick}sm_tban <#userid|name> {white}[length (minutes)] [reason]"
-		"en"		"{1} Benutzung: {firebrick}sm_tban <#userID|Name> {white}[Laenge (Minuten)] [Grund]"
+		"de"		"{1} Benutzung: {firebrick}sm_tban <#userID|Name> {white}[Laenge (Minuten)] [Grund]"
 	}
 
 	"TUnBanSyntax"
