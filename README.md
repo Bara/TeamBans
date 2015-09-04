@@ -1,6 +1,7 @@
 [CS:S/CS:GO] TeamBans [![build status](http://ci.git.tf/projects/7/status.png?ref=master)](http://ci.git.tf/projects/7?ref=master)
 ---
-[TeamBans on Git.TF](http://git.tf/Bara/TeamBans)
+ - [TeamBans on Git.TF](http://git.tf/Bara/TeamBans)
+ - [TeamBans on AlliedModders](https://forums.alliedmods.net/showthread.php?t=270761)
 
 ### Short description
 With TeamBans you can ban players from a team. CT and T ban aren't supported (but planned)
