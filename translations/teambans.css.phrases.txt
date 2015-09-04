@@ -106,6 +106,13 @@
 		"en"		"{1} Usage: {firebrick}sm_tunban <#userid|name>"
 		"de"		"{1} Benutzung: {firebrick}sm_tunban <#userID|Name>"
 	}
+	
+	"SBanSyntax"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Usage: {firebrick}sm_sban <#userid|name> {white}[length (minutes)] [reason]"
+		"de"		"{1} Benutzung: {firebrick}sm_sban <#userID|Name> {white}[Laenge (Minuten)] [Grund]"
+	}
 
 	"OnTeamBan"
 	{
@@ -115,6 +122,20 @@
 	}
 
 	"OnTeamBanPerma"
+	{
+		"#format"	"{1:N},{2:s},{3:s}"
+		"en"		"{firebrick}{1} {white}was {firebrick}permanently {white}banned from the {firebrick}server{white}! (Reason: {firebrick}{3}{white})"
+		"de"		"{firebrick}{1} {white}wurde {firebrick}permanent {white}vom {firebrick}Server {white}gebannt! (Grund: {firebrick}{3}{white})"
+	}
+	
+	"OnServerBan"
+	{
+		"#format"	"{1:N},{2:s},{3:d},{4:s}"
+		"en"		"{firebrick}{1} {white}was banned from the {firebrick}server{white}! (Length is {firebrick}{3} minutes {white}with the reason: {firebrick}{4}{white})"
+		"de"		"{firebrick}{1} {white}wurde vom {firebrick}Server {white}gebannt! (Länge beträgt {firebrick}{3} Minuten {white}mit dem Grund: {firebrick}{4}{white})"
+	}
+
+	"OnServerBanPerma"
 	{
 		"#format"	"{1:N},{2:s},{3:s}"
 		"en"		"{firebrick}{1} {white}was {firebrick}permanently {white}banned from the {firebrick}{2} team{white}! (Reason: {firebrick}{3}{white})"
@@ -174,6 +195,12 @@
 		"de"		"{1} Ban"
 	}
 	
+	"ServerBansTitle"
+	{
+		"en"		"Server Ban"
+		"de"		"Server Ban"
+	}
+	
 	"SelectPlayer"
 	{
 		"en"		"Select a player"
@@ -190,5 +217,11 @@
 	{
 		"en"		"Select a reason"
 		"de"		"Wähle ein Grund"
+	}
+	
+	"BanReason"
+	{
+		"en"		"You was banned from this server!"	
+		"de"		"Sie wurden von diesen Server verbannt!"
 	}
 }

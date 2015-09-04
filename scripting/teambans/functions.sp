@@ -52,7 +52,10 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 		TB_LogFile(DEBUG, "[TeamBans] (SetTeamBan) %s", sQuery);
 	
-	g_dDB.Query(SQLCallback_SetBan, sQuery, GetClientUserId(client), DBPrio_High);
+	if(team > TEAMBANS_SERVER)
+		g_dDB.Query(SQLCallback_SetBan, sQuery, GetClientUserId(client), DBPrio_High);
+	else if(team == TEAMBANS_SERVER)
+		g_dDB.Query(SQLCallback_SetServerBan, sQuery, GetClientUserId(client), DBPrio_High);
 	
 	char sTeam[6];
 	
@@ -65,10 +68,20 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 			else if(team == CS_TEAM_T)
 				Format(sTeam, sizeof(sTeam), "%T", "T", i);
 			
-			if(length > 0)
-				CShowActivityEx(admin, g_sTag, "%T", "OnTeamBan", i, client, sTeam, length, reason);
-			else if(length == 0)
-				CShowActivityEx(admin, g_sTag, "%T", "OnTeamBanPerma", i, client, sTeam, reason);
+			if(team > TEAMBANS_SERVER)
+			{
+				if(length > 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnTeamBan", i, client, sTeam, length, reason);
+				else if(length == 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnTeamBanPerma", i, client, sTeam, reason);
+			}
+			else
+			{
+				if(length > 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnServerBan", i, client, sTeam, length, reason);
+				else if(length == 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnServerBanPerma", i, client, sTeam, reason);
+			}
 		}
 	}
 }

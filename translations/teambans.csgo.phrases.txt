@@ -106,6 +106,13 @@
 		"en"		"{1} Usage: {darkred}sm_tunban <#userid|name>"
 		"de"		"{1} Benutzung: {darkred}sm_tunban <#userID|Name>"
 	}
+	
+	"SBanSyntax"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Usage: {darkred}sm_sban <#userid|name> {lightgreen}[length (minutes)] [reason]"
+		"de"		"{1} Benutzung: {darkred}sm_sban <#userID|Name> {lightgreen}[Laenge (Minuten)] [Grund]"
+	}
 
 	"OnTeamBan"
 	{
@@ -119,6 +126,20 @@
 		"#format"	"{1:N},{2:s},{3:s}"
 		"en"		"{darkred}{1} {lightgreen}was {darkred}permanently {lightgreen}banned from the {darkred}{2} team{lightgreen}! (Reason: {darkred}{3}{lightgreen})"
 		"de"		"{darkred}{1} {lightgreen}wurde {darkred}permanent {lightgreen}vom {darkred}{2} Team {lightgreen}gebannt! (Grund: {darkred}{3}{lightgreen})"
+	}
+	
+	"OnServerBan"
+	{
+		"#format"	"{1:N},{2:s},{3:d},{4:s}"
+		"en"		"{darkred}{1} {lightgreen}was banned from the {darkred}server{lightgreen}! (Length is {darkred}{3} minutes {lightgreen}with the reason: {darkred}{4}{lightgreen})"
+		"de"		"{darkred}{1} {lightgreen}wurde vom {darkred}Server {lightgreen}gebannt! (Länge beträgt {darkred}{3} Minuten {lightgreen}mit dem Grund: {darkred}{4}{lightgreen})"
+	}
+
+	"OnServerBanPerma"
+	{
+		"#format"	"{1:N},{2:s},{3:s}"
+		"en"		"{darkred}{1} {lightgreen}was {darkred}permanently {lightgreen}banned from the {darkred}server{lightgreen}! (Reason: {darkred}{3}{lightgreen})"
+		"de"		"{darkred}{1} {lightgreen}wurde {darkred}permanent {lightgreen}vom {darkred}Server {lightgreen}gebannt! (Grund: {darkred}{3}{lightgreen})"
 	}
 
 	"OnTeamUnBan"
@@ -174,6 +195,12 @@
 		"de"		"{1} Ban"
 	}
 	
+	"ServerBansTitle"
+	{
+		"en"		"Server Ban"
+		"de"		"Server Ban"
+	}
+	
 	"SelectPlayer"
 	{
 		"en"		"Select a player"
@@ -190,5 +217,11 @@
 	{
 		"en"		"Select a reason"
 		"de"		"Wähle ein Grund"
+	}
+	
+	"BanReason"
+	{
+		"en"		"You was banned from this server!"	
+		"de"		"Sie wurden von diesen Server verbannt!"
 	}
 }

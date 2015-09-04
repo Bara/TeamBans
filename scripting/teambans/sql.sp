@@ -80,6 +80,12 @@ public void SQL_OnClientAuthorized(Database db, DBResultSet results, const char[
 				
 				if(active == 1)
 				{
+					if(g_iPlayer[client][banTeam] == TEAMBANS_SERVER)
+					{
+						ResetVars(client);
+						KickClient(client, "%T", "BanReason", client);
+					}
+						
 					g_iPlayer[client][clientBanned] = true;
 					
 					if (g_iPlayer[client][banLength] == 0)

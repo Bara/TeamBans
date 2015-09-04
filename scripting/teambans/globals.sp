@@ -6,6 +6,10 @@
 
 #define MAX_BAN_REASON_LENGTH 256
 
+#define TEAMBANS_SERVER 1
+#define TEAMBANS_T CS_TEAM_T
+#define TEAMBANS_CT CS_TEA_CT
+
 #define IsDebug() g_iCvar[pluginDebug].BoolValue
 #define GetLogLevel() g_iCvar[logLevel].IntValue
 

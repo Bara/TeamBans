@@ -13,6 +13,7 @@ public void OnAdminMenuReady(Handle aTopmenu)
 	{
 		g_tTopMenu.AddItem("sm_ctban", AdminMenu_CTBan, PlayerCommands, "sm_ctban", ADMFLAG_BAN);
 		g_tTopMenu.AddItem("sm_tban", AdminMenu_TBan, PlayerCommands, "sm_tban", ADMFLAG_BAN);
+		g_tTopMenu.AddItem("sm_sban", AdminMenu_SBan, PlayerCommands, "sm_sban", ADMFLAG_BAN);
 	}
 }
 
@@ -44,6 +45,19 @@ public void AdminMenu_TBan(Handle topmenu, TopMenuAction action, TopMenuObject t
 	}
 }
 
+public void AdminMenu_SBan(Handle topmenu, TopMenuAction action, TopMenuObject topobj_id, int client, char[] title, int maxlength)
+{
+	if (action == TopMenuAction_DisplayOption)
+	{
+		char sBuffer[6];
+		Format(title, maxlength, "%T", "ServerBansTitle", client, sBuffer);
+	}
+	else if (action == TopMenuAction_SelectOption)
+	{
+		DisplaySBansMenu(client);
+	}
+}
+
 stock void DisplayCTBansMenu(int client)
 {
 	Menu menu = CreateMenu(MenuHandler_CTBansPlayerList);
@@ -61,6 +75,20 @@ stock void DisplayCTBansMenu(int client)
 stock void DisplayTBansMenu(int client)
 {
 	Menu menu = CreateMenu(MenuHandler_TBansPlayerList);
+	
+	char sTitle[100];
+	Format(sTitle, sizeof(sTitle), "%T", "SelectPlayer", client);
+	menu.SetTitle(sTitle);
+	menu.ExitBackButton = true;
+	
+	AddTargetsToMenu2(menu, client, COMMAND_FILTER_NO_BOTS|COMMAND_FILTER_CONNECTED);
+	
+	menu.Display(client, MENU_TIME_FOREVER);
+}
+
+stock void DisplaySBansMenu(int client)
+{
+	Menu menu = CreateMenu(MenuHandler_SBansPlayerList);
 	
 	char sTitle[100];
 	Format(sTitle, sizeof(sTitle), "%T", "SelectPlayer", client);
@@ -140,6 +168,36 @@ public int MenuHandler_TBansPlayerList(Menu menu, MenuAction action, int client,
 		else
 		{
 			g_iAMTeam[client] = CS_TEAM_T;
+			g_iAMTarget[client] = iTarget;
+			DisplayTeamBanTimeMenu(client);
+		}
+	}
+}
+
+public int MenuHandler_SBansPlayerList(Menu menu, MenuAction action, int client, int param)
+{
+	if (action == MenuAction_End)
+		delete menu;
+	else if (action == MenuAction_Cancel)
+	{
+		if (param == MenuCancel_ExitBack && g_tTopMenu)
+			g_tTopMenu.Display(client, TopMenuPosition_LastCategory);
+	}
+	else if (action == MenuAction_Select)
+	{
+		char sInfo[32], sName[32];
+		int iUserID, iTarget;
+
+		menu.GetItem(param, sInfo, sizeof(sInfo), _, sName, sizeof(sName));
+		iUserID = StringToInt(sInfo);
+
+		if ((iTarget = GetClientOfUserId(iUserID)) == 0)
+			CPrintToChat(client, "%T", "Player no longer available", client);
+		else if (!CanUserTarget(client, iTarget))
+			CPrintToChat(client, "%T", "Unable to target", client);
+		else
+		{
+			g_iAMTeam[client] = TEAMBANS_SERVER;
 			g_iAMTarget[client] = iTarget;
 			DisplayTeamBanTimeMenu(client);
 		}
