@@ -77,13 +77,21 @@ public void SQL_OnClientAuthorized(Database db, DBResultSet results, const char[
 				results.FetchString(3, g_iPlayer[client][banReason], MAX_BAN_REASON_LENGTH);
 				g_iPlayer[client][banID] = results.FetchInt(4);
 				g_iPlayer[client][banTeam] = results.FetchInt(5);
+				g_iPlayer[client][banDate] = results.FetchInt(6);
 				
 				if(active == 1)
 				{
 					if(g_iPlayer[client][banTeam] == TEAMBANS_SERVER)
 					{
-						ResetVars(client);
-						KickClient(client, "%T", "BanReason", client);
+						int iDate = GetTime();
+						
+						if(g_iPlayer[client][banDate] + g_iPlayer[client][banTimeleft] <= iDate)
+						{
+							ResetVars(client);
+							KickClient(client, "%T", "BanReason", client);
+						}
+						else
+							DelTeamBan(0, client);
 					}
 						
 					g_iPlayer[client][clientBanned] = true;
