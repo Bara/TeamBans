@@ -224,4 +224,10 @@
 		"en"		"You was banned from this server!"	
 		"de"		"Sie wurden von diesen Server verbannt!"
 	}
+	
+	"TeamBansAdminMenuTitle"
+	{
+		"en"		"TeamBans"
+		"de"		"TeamBans"
+	}
 }

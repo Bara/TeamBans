@@ -7,14 +7,24 @@ public void OnAdminMenuReady(Handle aTopmenu)
 	
 	g_tTopMenu = topmenu;
 	
-	TopMenuObject PlayerCommands = g_tTopMenu.FindCategory(ADMINMENU_PLAYERCOMMANDS);
-	
-	if(PlayerCommands != INVALID_TOPMENUOBJECT)
+	TopMenuObject TM_TeamBans = g_tTopMenu.AddCategory("adm_teambans", Category_Handler, "sm_sban", ADMFLAG_BAN);
+
+	if(TM_TeamBans != INVALID_TOPMENUOBJECT)
 	{
-		g_tTopMenu.AddItem("sm_ctban", AdminMenu_CTBan, PlayerCommands, "sm_ctban", ADMFLAG_BAN);
-		g_tTopMenu.AddItem("sm_tban", AdminMenu_TBan, PlayerCommands, "sm_tban", ADMFLAG_BAN);
-		g_tTopMenu.AddItem("sm_sban", AdminMenu_SBan, PlayerCommands, "sm_sban", ADMFLAG_BAN);
+		g_tTopMenu.AddItem("sm_ctban", AdminMenu_CTBan, TM_TeamBans, "sm_ctban", ADMFLAG_BAN);
+		g_tTopMenu.AddItem("sm_tban", AdminMenu_TBan, TM_TeamBans, "sm_tban", ADMFLAG_BAN);
+		g_tTopMenu.AddItem("sm_sban", AdminMenu_SBan, TM_TeamBans, "sm_sban", ADMFLAG_BAN);
 	}
+	else
+		return;
+}
+
+public void Category_Handler(Handle topmenu, TopMenuAction action, TopMenuObject topobj_id, int client, char[] buffer, int maxlength)
+{
+	if(action == TopMenuAction_DisplayTitle)
+		Format(buffer, maxlength, "%T", "TeamBansAdminMenuTitle", client);
+	else if(action == TopMenuAction_DisplayOption)
+		Format(buffer, maxlength, "%T", "TeamBansAdminMenuTitle", client);
 }
 
 public void AdminMenu_CTBan(Handle topmenu, TopMenuAction action, TopMenuObject topobj_id, int client, char[] title, int maxlength)
