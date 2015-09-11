@@ -1,8 +1,8 @@
 ### Server Plugin
  - API
  - Rage Ban/Ban disconnected players
- - Ban for both teams (ct+t)
- - Converter for CT Bans (databomb)
+ - Ban for both teams (ct+t) = server ban until one ban is expired
+ - Converter for CT Bans (databomb and other)
  - Command: sm_isteambanned <Name>
  - Offline Commands: sm_off<TEAM>ban <CommunityID> [Length] [Reason], sm_off<TEAM>unban <CommunityID>, sm_offisteambanned <CommunityID>
  - https://forums.alliedmods.net/showpo...87&postcount=8
