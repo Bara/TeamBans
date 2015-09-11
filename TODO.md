@@ -5,7 +5,6 @@
  - Converter for CT Bans (databomb and other)
  - Command: sm_isteambanned <Name>
  - Offline Commands: sm_off<TEAM>ban <CommunityID> [Length] [Reason], sm_off<TEAM>unban <CommunityID>, sm_offisteambanned <CommunityID>
- - https://forums.alliedmods.net/showpo...87&postcount=8
  - Add server ban (maybe sourcebans alternative ;) ?)
 
 ### Web Interface
