@@ -84,14 +84,16 @@ public void SQL_OnClientAuthorized(Database db, DBResultSet results, const char[
 					if(g_iPlayer[client][banTeam] == TEAMBANS_SERVER)
 					{
 						int iDate = GetTime();
-						
-						if(g_iPlayer[client][banDate] + g_iPlayer[client][banTimeleft] <= iDate)
+
+						if(g_iPlayer[client][banDate] + (g_iPlayer[client][banTimeleft] * 60) > iDate)
 						{
 							ResetVars(client);
 							KickClient(client, "%T", "BanReason", client);
 						}
 						else
 							DelTeamBan(0, client);
+						
+						return;
 					}
 						
 					g_iPlayer[client][clientBanned] = true;

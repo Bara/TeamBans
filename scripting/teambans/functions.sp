@@ -75,7 +75,7 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 				else if(length == 0)
 					CShowActivityEx(admin, g_sTag, "%T", "OnTeamBanPerma", i, client, sTeam, reason);
 			}
-			else
+			else if(team == TEAMBANS_SERVER)
 			{
 				if(length > 0)
 					CShowActivityEx(admin, g_sTag, "%T", "OnServerBan", i, client, sTeam, length, reason);
@@ -126,19 +126,22 @@ void DelTeamBan(int admin, int client)
 	
 	char sTeam[6];
 	
-	for (int i = 1; i <= MaxClients; i++)
+	if(team != TEAMBANS_SERVER)
 	{
-		if (IsClientValid(i))
+		for (int i = 1; i <= MaxClients; i++)
 		{
-			if(team == CS_TEAM_CT)
-				Format(sTeam, sizeof(sTeam), "%T", "CT", i);
-			else if(team == CS_TEAM_T)
-				Format(sTeam, sizeof(sTeam), "%T", "T", i);
-			
-			if(length > 0)
-				CShowActivityEx(admin, g_sTag, "%T", "OnTeamUnBan", i, client, length, reason, sTeam);
-			else if(length == 0)
-				CShowActivityEx(admin, g_sTag, "%T", "OnTeamUnBanPerma", i,  client, reason, sTeam);
+			if (IsClientValid(i))
+			{
+				if(team == TEAMBANS_CT)
+					Format(sTeam, sizeof(sTeam), "%T", "CT", i);
+				else if(team == TEAMBANS_T)
+					Format(sTeam, sizeof(sTeam), "%T", "T", i);
+				
+				if(length > 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnTeamUnBan", i, client, length, reason, sTeam);
+				else if(length == 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnTeamUnBanPerma", i,  client, reason, sTeam);
+			}
 		}
 	}
 }

@@ -26,9 +26,7 @@ public void SQLCallback_SetServerBan(Database db, DBResultSet results, const cha
 	int client = GetClientOfUserId(userid);
 	
 	if (IsClientValid(client))
-	{
 		CheckTeamBans(client);
-	}
 }
 
 public void SQLCallback_DelBan(Database db, DBResultSet results, const char[] error, any userid)
