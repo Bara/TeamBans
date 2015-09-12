@@ -160,7 +160,7 @@
 	{
 		"#format"	"{1:s},{2:N},{3:d},{4:d},{5:s},{6:s}"
 		"en"		"{1} {darkred}{2} {lightgreen}was banned for {darkred}{3} minutes {lightgreen}from the {darkred}{6} team{lightgreen}! Remaining: {darkred}{4} minutes {lightgreen}Reason: {darkred}{5}"
-		"de"		"{1} {darkred}{2} {lightgreen}wurde für {darkred}{3} Minuten {lightgreen}vom {{darkred}6} Team{lightgreen} gebannt! Verbleibend: {darkred}{4} Minuten {lightgreen}Grund: {darkred}{5}"
+		"de"		"{1} {darkred}{2} {lightgreen}wurde für {darkred}{3} Minuten {lightgreen}vom {darkred}{6} Team{lightgreen} gebannt! Verbleibend: {darkred}{4} Minuten {lightgreen}Grund: {darkred}{5}"
 	}
 
 	"TeamBansInfoPerma"
