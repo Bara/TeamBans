@@ -1,5 +1,5 @@
 ### Server Plugin
- - API
+ - API (Add, Edit Ban and Unban remaining)
  - Rage Ban/Ban disconnected players
  - Ban for both teams (ct+t) = server ban until one ban is expired
  - Converter for CT Bans (databomb and other)
