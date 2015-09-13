@@ -5,6 +5,9 @@ void CreateNatives()
 	CreateNative("TeamBans_GetClientLength", Native_GetClientLength);
 	CreateNative("TeamBans_GetClientTimeleft", Native_GetClientTimeleft);
 	CreateNative("TeamBans_GetClientReason", Native_GetClientReason);
+	
+	g_hOnBan = CreateGlobalForward("TeamBans_OnClientBan", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
+	g_hOnUnban = CreateGlobalForward("TeamBans_OnClientUnban", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
 }
 
 public int Native_IsClientBanned(Handle plugin, int numParams)

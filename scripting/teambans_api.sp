@@ -33,7 +33,7 @@ public Action Event_WeaponFire(Event event, const char[] name, bool dontBroadcas
 			char sReason[TEAMBANS_REASON_LENGTH];
 			TeamBans_GetClientReason(client, sReason, sizeof(sReason));
 			
-			PrintToChatAll("Client: %N", client);
+			PrintToChatAll("Client: %d", client);
 			PrintToChatAll("Status: %d", TeamBans_IsClientBanned(client));
 			PrintToChatAll("Team: %d", TeamBans_GetClientTeam(client));
 			PrintToChatAll("Length: %d", TeamBans_GetClientLength(client));
@@ -42,8 +42,27 @@ public Action Event_WeaponFire(Event event, const char[] name, bool dontBroadcas
 		}
 		else
 		{
-			PrintToChatAll("Client: %N", client);
+			PrintToChatAll("Client: %d", client);
 			PrintToChatAll("Status: %d", TeamBans_IsClientBanned(client));
 		}
 	}
+}
+
+public void TeamBans_OnClientBan(int admin, int client, int team, int length, int timeleft, const char[] reason)
+{
+	PrintToChatAll("Admin: %d", admin);
+	PrintToChatAll("Client: %d", client);
+	PrintToChatAll("Team: %d", team);
+	PrintToChatAll("Length: %d", length);
+	PrintToChatAll("Timeleft: %d", timeleft);
+	PrintToChatAll("Reason: %s", reason);
+}
+
+public void TeamBans_OnClientUnban(int admin, int client, int team, int length, const char[] reason)
+{
+	PrintToChatAll("Admin: %d", admin);
+	PrintToChatAll("Client: %d", client);
+	PrintToChatAll("Team: %d", team);
+	PrintToChatAll("Length: %d", length);
+	PrintToChatAll("Reason: %s", reason);
 }

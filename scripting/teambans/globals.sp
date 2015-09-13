@@ -70,3 +70,7 @@ KeyValues g_kvReasons;
 // Length
 char g_sLengthPath[PLATFORM_MAX_PATH];
 KeyValues g_kvLength;
+
+// Forwards
+Handle g_hOnBan = null;
+Handle g_hOnUnban = null;
