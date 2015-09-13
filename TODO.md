@@ -5,7 +5,6 @@
  - Converter for CT Bans (databomb and other)
  - Command: sm_changebanvalues <Name/CommunityID/UserID> <Length> <Timeleft> [Reason]
  - Offline Commands: sm_off<TEAM>ban <CommunityID> [Length] [Reason], sm_off<TEAM>unban <CommunityID>, sm_offisteambanned <CommunityID>
- - Add server ban (maybe sourcebans alternative ;) ?)
 
 ### Web Interface
  - List of Bans
