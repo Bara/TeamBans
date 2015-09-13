@@ -66,7 +66,7 @@ stock void ResetVars(int client, bool resetAuth = true)
 	g_iPlayer[client][banLength] = 0;
 	g_iPlayer[client][banTimeleft] = 0;
 	g_iPlayer[client][banTeam] = 0;
-	Format(g_iPlayer[client][banReason], MAX_BAN_REASON_LENGTH, "");
+	Format(g_iPlayer[client][banReason], TEAMBANS_REASON_LENGTH, "");
 	SafeCloseHandle(g_iPlayer[client][banCheck]);
 }
 

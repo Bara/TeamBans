@@ -10,6 +10,7 @@
 
 // Includes
 #include <multicolors>
+#include <teambans>
 
 // Include all .sp-files from teambans-folder
 #include "teambans/globals.sp"
@@ -22,15 +23,26 @@
 #include "teambans/callbacks.sp"
 #include "teambans/sql.sp"
 #include "teambans/adminmenu.sp"
+#include "teambans/natives.sp"
 
 public Plugin myinfo =
 {
-	name = PLUGIN_NAME,
-	author = PLUGIN_AUTHOR,
-	version = PLUGIN_VERSION,
-	description = PLUGIN_DESCRIPTION,
-	url = PLUGIN_URL
+	name = TEAMBANS_PLUGIN_NAME,
+	author = TEAMBANS_PLUGIN_AUTHOR,
+	version = TEAMBANS_PLUGIN_VERSION,
+	description = TEAMBANS_PLUGIN_DESCRIPTION,
+	url = TEAMBANS_PLUGIN_URL
 };
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max)
+{
+	RegPluginLibrary("teambans");
+	
+	CreateNatives();
+	// CreateForwards();
+	
+	return APLRes_Success;
+}
 
 public void OnPluginStart()
 {

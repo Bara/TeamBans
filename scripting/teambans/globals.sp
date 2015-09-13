@@ -1,15 +1,3 @@
-#define PLUGIN_NAME "TeamBans"
-#define PLUGIN_AUTHOR "Bara"
-#define PLUGIN_VERSION "1.0.0"
-#define PLUGIN_DESCRIPTION "With TeamBans you can ban players from a team. (CT and T ban aren't supported)"
-#define PLUGIN_URL "www.bara.in"
-
-#define MAX_BAN_REASON_LENGTH 256
-
-#define TEAMBANS_SERVER 1
-#define TEAMBANS_T CS_TEAM_T
-#define TEAMBANS_CT CS_TEAM_CT
-
 #define IsDebug() g_iCvar[pluginDebug].BoolValue
 #define GetLogLevel() g_iCvar[logLevel].IntValue
 
@@ -47,7 +35,7 @@ enum Data
 	banLength,
 	banTimeleft,
 	banTeam,
-	String:banReason[MAX_BAN_REASON_LENGTH],
+	String:banReason[TEAMBANS_REASON_LENGTH],
 	Handle:banCheck,
 	banDate
 };

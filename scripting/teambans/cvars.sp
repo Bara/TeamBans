@@ -1,6 +1,6 @@
 stock void Cvar_OnPluginStart()
 {
-	CreateConVar("teambans_version", PLUGIN_VERSION, PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
+	CreateConVar("teambans_version", TEAMBANS_PLUGIN_VERSION, TEAMBANS_PLUGIN_DESCRIPTION, FCVAR_NOTIFY | FCVAR_DONTRECORD);
 	
 	g_iCvar[pluginDebug] = CreateConVar("teambans_enable_debug", "1", "Enable debugging?", _, true, 0.0, true, 1.0);
 	

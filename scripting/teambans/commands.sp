@@ -128,19 +128,19 @@ public Action Command_SetCTBan(int client, int args)
 	
 	// Get Reason
 	char sReason[128], sBuffer[128];
-	if(args >= 3)
+	if(args == 2)
+	{
+		char sTBuffer[32];
+		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
+		Format(sReason, sizeof(sReason), "%T", sTBuffer, LANG_SERVER);
+	}
+	else 
 	{
 		for (int i = 3; i <= args; i++)
 		{
 			GetCmdArg(i, sBuffer, sizeof(sBuffer));
 			Format(sReason, sizeof(sReason), "%s %s", sReason , sBuffer);
 		}
-	}
-	else
-	{
-		char sTBuffer[32];
-		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
-		Format(sReason, sizeof(sReason), "%T", sTBuffer, LANG_SERVER);
 	}
 	
 	char target_name[MAX_TARGET_LENGTH];
@@ -158,6 +158,12 @@ public Action Command_SetCTBan(int client, int args)
 	{
 		int target = target_list[i];
 		
+		if (!IsClientValid(target))
+		{
+			CReplyToCommand(client, "%T", "Invalid", client);
+			return Plugin_Handled;
+		}
+		
 		char sCommunityID[64], sACommunityID[64];
  		if(!GetClientAuthId(target, AuthId_SteamID64, sCommunityID, sizeof(sCommunityID)))
  			return Plugin_Handled;
@@ -172,12 +178,6 @@ public Action Command_SetCTBan(int client, int args)
  		
  		if(GetLogLevel() >= view_as<int>(INFO))
 			TB_LogFile(INFO, "[TeamBans] (Command_SetCTBan) Admin: \"%L\" %s - Player: \"%L\" %s - Length: %d - Reason: %s", client, sACommunityID, target, sCommunityID, iLength, sReason);
-
-		if (!IsClientValid(target))
-		{
-			CReplyToCommand(client, "%T", "Invalid", client);
-			return Plugin_Handled;
-		}
 		
 		// Only one team ban/person
 		if (!HasClientTeamBan(target))
@@ -231,19 +231,19 @@ public Action Command_SetTBan(int client, int args)
 	
 	// Get Reason
 	char sReason[128], sBuffer[128];
-	if(args >= 3)
+	if(args == 2)
+	{
+		char sTBuffer[32];
+		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
+		Format(sReason, sizeof(sReason), "%T", sTBuffer, LANG_SERVER);
+	}
+	else 
 	{
 		for (int i = 3; i <= args; i++)
 		{
 			GetCmdArg(i, sBuffer, sizeof(sBuffer));
 			Format(sReason, sizeof(sReason), "%s %s", sReason , sBuffer);
 		}
-	}
-	else
-	{
-		char sTBuffer[32];
-		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
-		Format(sReason, sizeof(sReason), "%T", sTBuffer, LANG_SERVER);
 	}
 
 	char target_name[MAX_TARGET_LENGTH];
@@ -261,6 +261,12 @@ public Action Command_SetTBan(int client, int args)
 	{
 		int target = target_list[i];
 		
+		if (!IsClientValid(target))
+		{
+			CReplyToCommand(client, "%T", "Invalid", client);
+			return Plugin_Handled;
+		}
+		
 		char sCommunityID[64], sACommunityID[64];
  		if(!GetClientAuthId(target, AuthId_SteamID64, sCommunityID, sizeof(sCommunityID)))
  			return Plugin_Handled;
@@ -275,12 +281,6 @@ public Action Command_SetTBan(int client, int args)
  		
  		if(GetLogLevel() >= view_as<int>(INFO))
 			TB_LogFile(INFO, "[TeamBans] (Command_SetTBan) Admin: \"%L\" %s - Player: \"%L\" %s - Length: %d - Reason: %s", client, sACommunityID, target, sCommunityID, iLength, sReason);
-
-		if (!IsClientValid(target))
-		{
-			CReplyToCommand(client, "%T", "Invalid", client);
-			return Plugin_Handled;
-		}
 
 		// Only one team ban/person
 		if (!HasClientTeamBan(target))
@@ -334,19 +334,19 @@ public Action Command_SetSBan(int client, int args)
 	
 	// Get Reason
 	char sReason[128], sBuffer[128];
-	if(args >= 3)
+	if(args == 2)
+	{
+		char sTBuffer[32];
+		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
+		Format(sReason, sizeof(sReason), "%T", sTBuffer, LANG_SERVER);
+	}
+	else 
 	{
 		for (int i = 3; i <= args; i++)
 		{
 			GetCmdArg(i, sBuffer, sizeof(sBuffer));
 			Format(sReason, sizeof(sReason), "%s %s", sReason , sBuffer);
 		}
-	}
-	else
-	{
-		char sTBuffer[32];
-		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
-		Format(sReason, sizeof(sReason), "%T", sTBuffer, LANG_SERVER);
 	}
 
 	char target_name[MAX_TARGET_LENGTH];
@@ -364,6 +364,12 @@ public Action Command_SetSBan(int client, int args)
 	{
 		int target = target_list[i];
 		
+		if (!IsClientValid(target))
+		{
+			CReplyToCommand(client, "%T", "Invalid", client);
+			return Plugin_Handled;
+		}
+		
 		char sCommunityID[64], sACommunityID[64];
  		if(!GetClientAuthId(target, AuthId_SteamID64, sCommunityID, sizeof(sCommunityID)))
  			return Plugin_Handled;
@@ -378,12 +384,6 @@ public Action Command_SetSBan(int client, int args)
  		
  		if(GetLogLevel() >= view_as<int>(INFO))
 			TB_LogFile(INFO, "[TeamBans] (Command_SetTBan) Admin: \"%L\" %s - Player: \"%L\" %s - Length: %d - Reason: %s", client, sACommunityID, target, sCommunityID, iLength, sReason);
-
-		if (!IsClientValid(target))
-		{
-			CReplyToCommand(client, "%T", "Invalid", client);
-			return Plugin_Handled;
-		}
 
 		SetTeamBan(client, target, TEAMBANS_SERVER, iLength, iLength, sReason);
 	}

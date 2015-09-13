@@ -74,7 +74,7 @@ public void SQL_OnClientAuthorized(Database db, DBResultSet results, const char[
 				g_iPlayer[client][banLength] = results.FetchInt(0);
 				g_iPlayer[client][banTimeleft] = results.FetchInt(1);
 				int active = results.FetchInt(2);
-				results.FetchString(3, g_iPlayer[client][banReason], MAX_BAN_REASON_LENGTH);
+				results.FetchString(3, g_iPlayer[client][banReason], TEAMBANS_REASON_LENGTH);
 				g_iPlayer[client][banID] = results.FetchInt(4);
 				g_iPlayer[client][banTeam] = results.FetchInt(5);
 				g_iPlayer[client][banDate] = results.FetchInt(6);
@@ -155,7 +155,7 @@ public void SQL_ReCheckTeamBans(Database db, DBResultSet results, const char[] e
 				g_iPlayer[client][banLength] = results.FetchInt(0);
 				g_iPlayer[client][banTimeleft] = results.FetchInt(1);
 				int active = results.FetchInt(2);
-				results.FetchString(3, g_iPlayer[client][banReason], MAX_BAN_REASON_LENGTH);
+				results.FetchString(3, g_iPlayer[client][banReason], TEAMBANS_REASON_LENGTH);
 				g_iPlayer[client][banID] = results.FetchInt(4);
 				g_iPlayer[client][banTeam] = results.FetchInt(5);
 				
