@@ -35,9 +35,9 @@ public Action Command_TeamBans(int client, int args)
 
 					char sName[MAX_NAME_LENGTH], sTeam[4];
 					
-					if(GetClientBanTeam(client) == CS_TEAM_CT)
+					if(GetClientBanTeam(client) == TEAMBANS_CT)
 						Format(sTeam, sizeof(sTeam), "%T", "CT", client);
-					else if(GetClientBanTeam(client) == CS_TEAM_T)
+					else if(GetClientBanTeam(client) == TEAMBANS_T)
 						Format(sTeam, sizeof(sTeam), "%T", "T", client);
 					
 					if(g_iPlayer[i][banLength] > 0)
@@ -77,9 +77,9 @@ public int Menu_Block(Menu menu, MenuAction action, int client, int param)
 		{
 			char sTeam[6];
 			
-			if(GetClientBanTeam(target) == CS_TEAM_CT)
+			if(GetClientBanTeam(target) == TEAMBANS_CT)
 				Format(sTeam, sizeof(sTeam), "%T", "CT", client);
-			else if(GetClientBanTeam(target) == CS_TEAM_T)
+			else if(GetClientBanTeam(target) == TEAMBANS_T)
 				Format(sTeam, sizeof(sTeam), "%T", "T", client);
 
 			if(g_iPlayer[target][banLength] > 0)
@@ -181,10 +181,10 @@ public Action Command_SetCTBan(int client, int args)
 		
 		// Only one team ban/person
 		if (!HasClientTeamBan(target))
-			SetTeamBan(client, target, CS_TEAM_CT, iLength, iLength, sReason);
+			SetTeamBan(client, target, TEAMBANS_CT, iLength, iLength, sReason);
 		else
 		{
-			if(GetClientBanTeam(client) == CS_TEAM_CT)
+			if(GetClientBanTeam(client) == TEAMBANS_CT)
 			{
 				CReplyToCommand(client, "%T", "IsAlreadyCTBanned", client, g_sTag);
 				return Plugin_Handled;
@@ -284,10 +284,10 @@ public Action Command_SetTBan(int client, int args)
 
 		// Only one team ban/person
 		if (!HasClientTeamBan(target))
-			SetTeamBan(client, target, CS_TEAM_T, iLength, iLength, sReason);
+			SetTeamBan(client, target, TEAMBANS_T, iLength, iLength, sReason);
 		else
 		{
-			if(GetClientBanTeam(client) == CS_TEAM_T)
+			if(GetClientBanTeam(client) == TEAMBANS_T)
 			{
 				CReplyToCommand(client, "%T", "IsAlreadyTBanned", client, g_sTag);
 				return Plugin_Handled;
@@ -432,7 +432,7 @@ public Action Command_DelCTBan(int client, int args)
 			return Plugin_Handled;
 		}
 
-		if (HasClientTeamBan(target) && GetClientBanTeam(client) == CS_TEAM_CT)
+		if (HasClientTeamBan(target) && GetClientBanTeam(client) == TEAMBANS_CT)
 			DelTeamBan(client, target);
 		else
 		{
@@ -485,7 +485,7 @@ public Action Command_DelTBan(int client, int args)
 			return Plugin_Handled;
 		}
 
-		if (HasClientTeamBan(target) && GetClientBanTeam(client) == CS_TEAM_T)
+		if (HasClientTeamBan(target) && GetClientBanTeam(client) == TEAMBANS_T)
 			DelTeamBan(client, target);
 		else
 		{

@@ -63,9 +63,9 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 	{
 		if (IsClientValid(i))
 		{
-			if(team == CS_TEAM_CT)
+			if(team == TEAMBANS_CT)
 				Format(sTeam, sizeof(sTeam), "%T", "CT", i);
-			else if(team == CS_TEAM_T)
+			else if(team == TEAMBANS_T)
 				Format(sTeam, sizeof(sTeam), "%T", "T", i);
 			
 			if(team > TEAMBANS_SERVER)

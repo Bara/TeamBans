@@ -91,9 +91,9 @@ stock void IsAndMoveClient(int client)
 		{
 			char sTeam[6];
 			
-			if(GetClientBanTeam(client) == CS_TEAM_CT)
+			if(GetClientBanTeam(client) == TEAMBANS_CT)
 				Format(sTeam, sizeof(sTeam), "%T", "CT", client);
-			else if(GetClientBanTeam(client) == CS_TEAM_T)
+			else if(GetClientBanTeam(client) == TEAMBANS_T)
 				Format(sTeam, sizeof(sTeam), "%T", "T", client);
 				
 			if(g_iPlayer[client][banLength] > 0)
@@ -101,10 +101,10 @@ stock void IsAndMoveClient(int client)
 			else if(g_iPlayer[client][banLength] == 0)
 				CPrintToChat(client, "%T", "TeamBannedPerma", client, g_sTag, sTeam);
 			
-			if(GetClientTeam(client) == CS_TEAM_CT && GetClientBanTeam(client) == CS_TEAM_CT)
-				SwitchTeam(client, CS_TEAM_T);
-			else if(GetClientTeam(client) == CS_TEAM_T && GetClientBanTeam(client) == CS_TEAM_T)
-				SwitchTeam(client, CS_TEAM_CT);
+			if(GetClientTeam(client) == TEAMBANS_CT && GetClientBanTeam(client) == TEAMBANS_CT)
+				SwitchTeam(client, TEAMBANS_T);
+			else if(GetClientTeam(client) == TEAMBANS_T && GetClientBanTeam(client) == TEAMBANS_T)
+				SwitchTeam(client, TEAMBANS_CT);
 		}
 	}
 }
@@ -117,9 +117,9 @@ stock bool IsAndMoveClient_JoinTeam(int client, int team)
 		{
 			char sTeam[6];
 			
-			if(GetClientBanTeam(client) == CS_TEAM_CT)
+			if(GetClientBanTeam(client) == TEAMBANS_CT)
 				Format(sTeam, sizeof(sTeam), "%T", "CT", client);
-			else if(GetClientBanTeam(client) == CS_TEAM_T)
+			else if(GetClientBanTeam(client) == TEAMBANS_T)
 				Format(sTeam, sizeof(sTeam), "%T", "T", client);
 				
 			if(g_iPlayer[client][banLength] > 0)
@@ -127,10 +127,10 @@ stock bool IsAndMoveClient_JoinTeam(int client, int team)
 			else if(g_iPlayer[client][banLength] == 0)
 				CPrintToChat(client, "%T", "TeamBannedPerma", client, g_sTag, sTeam);
 			
-			if(GetClientTeam(client) == CS_TEAM_CT && GetClientBanTeam(client) == CS_TEAM_CT)
-				SwitchTeam(client, CS_TEAM_T);
-			else if(GetClientTeam(client) == CS_TEAM_T && GetClientBanTeam(client) == CS_TEAM_T)
-				SwitchTeam(client, CS_TEAM_CT);
+			if(GetClientTeam(client) == TEAMBANS_CT && GetClientBanTeam(client) == TEAMBANS_CT)
+				SwitchTeam(client, TEAMBANS_T);
+			else if(GetClientTeam(client) == TEAMBANS_T && GetClientBanTeam(client) == TEAMBANS_T)
+				SwitchTeam(client, TEAMBANS_CT);
 			
 			return true;
 		}

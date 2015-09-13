@@ -8,7 +8,7 @@ public Action Timer_CheckClients(Handle timer, any userid)
 public Action Timer_BanCheck(Handle timer, any userid)
 {
 	int client = GetClientOfUserId(userid);
-	if (IsClientValid(client) && GetClientTeam(client) == CS_TEAM_T)
+	if (IsClientValid(client) && GetClientTeam(client) == TEAMBANS_T)
 	{
 		if (g_iPlayer[client][banTimeleft] == 1)
 		{
