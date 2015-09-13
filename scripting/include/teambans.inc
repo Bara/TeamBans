@@ -16,10 +16,14 @@
 #define TEAMBANS_REASON_LENGTH 256
 
 native bool TeamBans_IsClientBanned(int client);
+
 native int TeamBans_GetClientTeam(int client);
 native int TeamBans_GetClientLength(int client);
 native int TeamBans_GetClientTimeleft(int client);
 native void TeamBans_GetClientReason(int client, const char[] reason, int maxlength);
+
+native void TeamBans_SetClientBan(int admin, int client, int team, int length, int timeleft, char[] reason);
+native void TeamBans_DelClientBan(int admin, int client);
 
 forward void TeamBans_OnClientBan(int admin, int client, int team, int length, int timeleft, const char[] reason);
 forward void TeamBans_OnClientUnban(int admin, int client, int team, int length, const char[] reason);
