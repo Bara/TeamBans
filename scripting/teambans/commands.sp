@@ -95,7 +95,7 @@ public int Menu_Block(Menu menu, MenuAction action, int client, int param)
 
 public Action Command_SetCTBan(int client, int args)
 {
-	if (args < 2)
+	if (args < 1)
 	{
 		CReplyToCommand(client, "%T", "CTBanSyntax", client, g_sTag);
 		return Plugin_Handled;
@@ -128,7 +128,7 @@ public Action Command_SetCTBan(int client, int args)
 	
 	// Get Reason
 	char sReason[128], sBuffer[128];
-	if(args == 2)
+	if(args <= 2)
 	{
 		char sTBuffer[32];
 		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
@@ -198,7 +198,7 @@ public Action Command_SetCTBan(int client, int args)
 
 public Action Command_SetTBan(int client, int args)
 {
-	if (args < 3)
+	if (args < 1)
 	{
 		CReplyToCommand(client, "%T", "TBanSyntax", client, g_sTag);
 		return Plugin_Handled;
@@ -231,7 +231,7 @@ public Action Command_SetTBan(int client, int args)
 	
 	// Get Reason
 	char sReason[128], sBuffer[128];
-	if(args == 2)
+	if(args <= 2)
 	{
 		char sTBuffer[32];
 		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
@@ -301,7 +301,7 @@ public Action Command_SetTBan(int client, int args)
 
 public Action Command_SetSBan(int client, int args)
 {
-	if (args < 3)
+	if (args < 1)
 	{
 		CReplyToCommand(client, "%T", "SBanSyntax", client, g_sTag);
 		return Plugin_Handled;
@@ -334,7 +334,7 @@ public Action Command_SetSBan(int client, int args)
 	
 	// Get Reason
 	char sReason[128], sBuffer[128];
-	if(args == 2)
+	if(args <= 2)
 	{
 		char sTBuffer[32];
 		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
