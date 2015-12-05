@@ -48,5 +48,11 @@ public SharedPlugin __pl_teambans =
 public __pl_teambans_SetNTVOptional()
 {
 	MarkNativeAsOptional("TeamBans_IsClientBanned");
+	MarkNativeAsOptional("TeamBans_GetClientTeam");
+	MarkNativeAsOptional("TeamBans_GetClientLength");
+	MarkNativeAsOptional("TeamBans_GetClientTimeleft");
+	MarkNativeAsOptional("TeamBans_GetClientReason");
+	MarkNativeAsOptional("TeamBans_SetClientBan");
+	MarkNativeAsOptional("TeamBans_DelClientBan");
 }
 #endif
