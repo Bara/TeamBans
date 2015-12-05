@@ -15,7 +15,7 @@ stock void TB_LogFile(ELOG_LEVEL level = INFO, const char[] format, any ...)
 	Format(sFilePre, sizeof(sFilePre), "log_%s", g_sELogLevel[level]);
 	
 	char sDate[64];
-	FormatTime(sDate, sizeof(sDate), "%F", GetTime());
+	FormatTime(sDate, sizeof(sDate), "%y%m%d", GetTime());
 	
 	Format(sFile, sizeof(sFile), "%s/%s_%s.log", sPath, sFilePre, sDate);
 
