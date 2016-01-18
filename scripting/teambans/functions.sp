@@ -55,7 +55,6 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 	Call_StartForward(g_hOnBan);
 	Call_PushCell(admin);
 	Call_PushCell(client);
-	Call_PushString(sCommunityID);
 	Call_PushCell(team);
 	Call_PushCell(length);
 	Call_PushCell(timeleft);

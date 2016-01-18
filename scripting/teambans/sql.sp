@@ -254,9 +254,8 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 					if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 						TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineBans) %s", sQuery);
 						
-					Call_StartForward(g_hOnBan);
+					Call_StartForward(g_hOnOBan);
 					Call_PushCell(admin);
-					Call_PushCell(0);
 					Call_PushString(target);
 					Call_PushCell(team);
 					Call_PushCell(length);

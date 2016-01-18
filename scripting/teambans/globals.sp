@@ -77,3 +77,4 @@ KeyValues g_kvLength;
 // Forwards
 Handle g_hOnBan = null;
 Handle g_hOnUnban = null;
+Handle g_hOnOBan = null;

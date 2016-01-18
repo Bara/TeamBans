@@ -15,7 +15,8 @@ void CreateNatives()
 
 void CreateForwards()
 {
-	g_hOnBan = CreateGlobalForward("TeamBans_OnClientBan", ET_Ignore, Param_Cell, Param_Cell, Param_String, Param_Cell, Param_Cell, Param_Cell, Param_String);
+	g_hOnBan = CreateGlobalForward("TeamBans_OnClientBan", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
+	g_hOnOBan = CreateGlobalForward("TeamBans_OnClientOfflineBan", ET_Ignore, Param_Cell, Param_String, Param_Cell, Param_Cell, Param_Cell, Param_String);
 	g_hOnUnban = CreateGlobalForward("TeamBans_OnClientUnban", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
 }
 
