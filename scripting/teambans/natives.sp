@@ -10,8 +10,8 @@ void CreateNatives()
 	CreateNative("TeamBans_SetClientBan", Native_SetClientBan);
 	// CreateNative("TeamBans_DelClientBan", Native_DelClientBan); // TODO
 	
-	CreateNative("TeamBans_GetTeamName", Native_GetTeamName);
-	CreateNative("TeamBans_GetTeamNumber", Native_GetTeamNumber);
+	CreateNative("TeamBans_GetTeamNameByNumber", Native_GetTeamName);
+	CreateNative("TeamBans_GetTeamNumberByName", Native_GetTeamNumber);
 }
 
 void CreateForwards()
@@ -145,7 +145,7 @@ public int Native_SetClientBan(Handle plugin, int numParams)
 		{
 			char sTeam[TEAMBANS_TEAMNAME_SIZE], sTranslation[64], sBuffer[256];
 			
-			TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), LANG_SERVER);
+			TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam), LANG_SERVER);
 			
 			Format(sTranslation, sizeof(sTranslation), "IsAlready%sBanned", sTeam);
 			Format(sBuffer, sizeof(sBuffer), "%T", sTranslation, admin);

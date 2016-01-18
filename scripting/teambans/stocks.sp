@@ -87,20 +87,21 @@ stock void IsAndMoveClient(int client)
 {
 	if (HasClientTeamBan(client))
 	{
-		if(GetClientBanTeam(client) == GetClientTeam(client))
+		int team = GetClientBanTeam(client);
+		if(team == GetClientTeam(client))
 		{
 			char sTeam[TEAMBANS_TEAMNAME_SIZE];
 			
-			TeamBans_GetTeamName(GetClientBanTeam(client), sTeam, sizeof(sTeam), client);
+			TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam), client);
 				
 			if(g_iPlayer[client][banLength] > 0)
 				CPrintToChat(client, "%T", "TeamBanned", client, g_sTag, g_iPlayer[client][banTimeleft], sTeam);
 			else if(g_iPlayer[client][banLength] == 0)
 				CPrintToChat(client, "%T", "TeamBannedPerma", client, g_sTag, sTeam);
 			
-			if(GetClientTeam(client) == TEAMBANS_CT && GetClientBanTeam(client) == TEAMBANS_CT)
+			if(GetClientTeam(client) == TEAMBANS_CT && team == TEAMBANS_CT)
 				SwitchTeam(client, TEAMBANS_T);
-			else if(GetClientTeam(client) == TEAMBANS_T && GetClientBanTeam(client) == TEAMBANS_T)
+			else if(GetClientTeam(client) == TEAMBANS_T && team == TEAMBANS_T)
 				SwitchTeam(client, TEAMBANS_CT);
 		}
 	}
@@ -110,20 +111,21 @@ stock bool IsAndMoveClient_JoinTeam(int client, int team)
 {
 	if (HasClientTeamBan(client))
 	{
-		if(GetClientBanTeam(client) == team)
+		int iTeam = GetClientBanTeam(client);
+		if(iTeam == team)
 		{
 			char sTeam[TEAMBANS_TEAMNAME_SIZE];
 			
-			TeamBans_GetTeamName(GetClientBanTeam(client), sTeam, sizeof(sTeam), client);
+			TeamBans_GetTeamNameByNumber(iTeam, sTeam, sizeof(sTeam), client);
 				
 			if(g_iPlayer[client][banLength] > 0)
 				CPrintToChat(client, "%T", "TeamBanned", client, g_sTag, g_iPlayer[client][banTimeleft], sTeam);
 			else if(g_iPlayer[client][banLength] == 0)
 				CPrintToChat(client, "%T", "TeamBannedPerma", client, g_sTag, sTeam);
 			
-			if(GetClientTeam(client) == TEAMBANS_CT && GetClientBanTeam(client) == TEAMBANS_CT)
+			if(GetClientTeam(client) == TEAMBANS_CT && iTeam == TEAMBANS_CT)
 				SwitchTeam(client, TEAMBANS_T);
-			else if(GetClientTeam(client) == TEAMBANS_T && GetClientBanTeam(client) == TEAMBANS_T)
+			else if(GetClientTeam(client) == TEAMBANS_T && iTeam == TEAMBANS_T)
 				SwitchTeam(client, TEAMBANS_CT);
 			
 			return true;

@@ -37,7 +37,7 @@ public void AdminMenu_CTBan(Handle topmenu, TopMenuAction action, TopMenuObject 
 	if (action == TopMenuAction_DisplayOption)
 	{
 		char sBuffer[TEAMBANS_TEAMNAME_SIZE];
-		TeamBans_GetTeamName(TEAMBANS_CT, sBuffer, sizeof(sBuffer), client);
+		TeamBans_GetTeamNameByNumber(TEAMBANS_CT, sBuffer, sizeof(sBuffer), client);
 		Format(title, maxlength, "%T", "TeamBansTitle", client, sBuffer);
 	}
 	else if (action == TopMenuAction_SelectOption)
@@ -51,7 +51,7 @@ public void AdminMenu_TBan(Handle topmenu, TopMenuAction action, TopMenuObject t
 	if (action == TopMenuAction_DisplayOption)
 	{
 		char sBuffer[TEAMBANS_TEAMNAME_SIZE];
-		TeamBans_GetTeamName(TEAMBANS_T, sBuffer, sizeof(sBuffer), client);
+		TeamBans_GetTeamNameByNumber(TEAMBANS_T, sBuffer, sizeof(sBuffer), client);
 		Format(title, maxlength, "%T", "TeamBansTitle", client, sBuffer);
 	}
 	else if (action == TopMenuAction_SelectOption)
@@ -65,7 +65,7 @@ public void AdminMenu_SBan(Handle topmenu, TopMenuAction action, TopMenuObject t
 	if (action == TopMenuAction_DisplayOption)
 	{
 		char sBuffer[TEAMBANS_TEAMNAME_SIZE];
-		TeamBans_GetTeamName(TEAMBANS_SERVER, sBuffer, sizeof(sBuffer), client);
+		TeamBans_GetTeamNameByNumber(TEAMBANS_SERVER, sBuffer, sizeof(sBuffer), client);
 		Format(title, maxlength, "%T", "ServerBansTitle", client, sBuffer);
 	}
 	else if (action == TopMenuAction_SelectOption)

@@ -72,7 +72,7 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 	{
 		if (IsClientValid(i))
 		{
-			TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), i);
+			TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam), i);
 			
 			if(team > TEAMBANS_SERVER)
 			{
@@ -146,7 +146,7 @@ void DelTeamBan(int admin, int client)
 		{
 			if (IsClientValid(i))
 			{
-				TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), i);
+				TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam), i);
 				
 				if(length > 0)
 					CShowActivityEx(admin, g_sTag, "%T", "OnTeamUnBan", i, client, length, reason, sTeam);
