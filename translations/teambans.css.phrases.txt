@@ -5,10 +5,17 @@
 		"en"		"T"
 		"de"		"T"
 	}
+	
 	"CT"
 	{
 		"en"		"CT"
 		"de"		"CT"
+	}
+	
+	"Server"
+	{
+		"en"		"Server"
+		"de"		"Server"
 	}
 	
 	"TeamBanned"
@@ -232,8 +239,9 @@
 	
 	"ServerBansTitle"
 	{
-		"en"		"Server Ban"
-		"de"		"Server Ban"
+		"#format"	"{1:s}"
+		"en"		"{1} Ban"
+		"de"		"{1} Ban"
 	}
 	
 	"SelectPlayer"

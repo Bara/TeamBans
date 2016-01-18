@@ -33,12 +33,9 @@ public Action Command_TeamBans(int client, int args)
 					char sUserID[128];
 					IntToString(GetClientUserId(i), sUserID, sizeof(sUserID));
 
-					char sName[MAX_NAME_LENGTH], sTeam[4];
+					char sName[MAX_NAME_LENGTH], sTeam[TEAMBANS_TEAMNAME_SIZE];
 					
-					if(GetClientBanTeam(client) == TEAMBANS_CT)
-						Format(sTeam, sizeof(sTeam), "%T", "CT", client);
-					else if(GetClientBanTeam(client) == TEAMBANS_T)
-						Format(sTeam, sizeof(sTeam), "%T", "T", client);
+					TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), client);
 					
 					if(g_iPlayer[i][banLength] > 0)
 						Format(sName, sizeof(sName), "%T", "TeamBansListPlayer", client, sTeam, i, g_iPlayer[i][banTimeleft], g_iPlayer[i][banLength]);
@@ -75,12 +72,9 @@ public int Menu_Block(Menu menu, MenuAction action, int client, int param)
 
 		if (IsClientValid(target))
 		{
-			char sTeam[6];
+			char sTeam[TEAMBANS_TEAMNAME_SIZE];
 			
-			if(GetClientBanTeam(target) == TEAMBANS_CT)
-				Format(sTeam, sizeof(sTeam), "%T", "CT", client);
-			else if(GetClientBanTeam(target) == TEAMBANS_T)
-				Format(sTeam, sizeof(sTeam), "%T", "T", client);
+			TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), client);
 
 			if(g_iPlayer[target][banLength] > 0)
 				CPrintToChat(client, "%T", "TeamBansInfo", client, g_sTag, target, g_iPlayer[target][banLength], g_iPlayer[target][banTimeleft], g_iPlayer[target][banReason], sTeam);
@@ -533,7 +527,7 @@ public Action Command_OBan(int client, int args)
 	GetCmdArg(1, target, sizeof(target));
 	
 	// Get team
-	char team[12];
+	char team[TEAMBANS_TEAMNAME_SIZE];
 	GetCmdArg(2, team, sizeof(team));
 	
 	int iTeam;

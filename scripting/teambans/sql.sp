@@ -270,11 +270,8 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 					{
 						if (IsClientValid(i))
 						{
-							char sTeam[12];
-							if(team == TEAMBANS_CT)
-								Format(sTeam, sizeof(sTeam), "%T", "CT", i);
-							else if(team == TEAMBANS_T)
-								Format(sTeam, sizeof(sTeam), "%T", "T", i);
+							char sTeam[TEAMBANS_TEAMNAME_SIZE];
+							TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), i);
 							
 							if(team > TEAMBANS_SERVER)
 							{

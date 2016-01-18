@@ -89,12 +89,9 @@ stock void IsAndMoveClient(int client)
 	{
 		if(GetClientBanTeam(client) == GetClientTeam(client))
 		{
-			char sTeam[6];
+			char sTeam[TEAMBANS_TEAMNAME_SIZE];
 			
-			if(GetClientBanTeam(client) == TEAMBANS_CT)
-				Format(sTeam, sizeof(sTeam), "%T", "CT", client);
-			else if(GetClientBanTeam(client) == TEAMBANS_T)
-				Format(sTeam, sizeof(sTeam), "%T", "T", client);
+			TeamBans_GetTeamName(GetClientBanTeam(client), sTeam, sizeof(sTeam), client);
 				
 			if(g_iPlayer[client][banLength] > 0)
 				CPrintToChat(client, "%T", "TeamBanned", client, g_sTag, g_iPlayer[client][banTimeleft], sTeam);
@@ -115,12 +112,9 @@ stock bool IsAndMoveClient_JoinTeam(int client, int team)
 	{
 		if(GetClientBanTeam(client) == team)
 		{
-			char sTeam[6];
+			char sTeam[TEAMBANS_TEAMNAME_SIZE];
 			
-			if(GetClientBanTeam(client) == TEAMBANS_CT)
-				Format(sTeam, sizeof(sTeam), "%T", "CT", client);
-			else if(GetClientBanTeam(client) == TEAMBANS_T)
-				Format(sTeam, sizeof(sTeam), "%T", "T", client);
+			TeamBans_GetTeamName(GetClientBanTeam(client), sTeam, sizeof(sTeam), client);
 				
 			if(g_iPlayer[client][banLength] > 0)
 				CPrintToChat(client, "%T", "TeamBanned", client, g_sTag, g_iPlayer[client][banTimeleft], sTeam);

@@ -8,8 +8,13 @@ void CreateNatives()
 	CreateNative("TeamBans_GetClientReason", Native_GetClientReason);
 	
 	CreateNative("TeamBans_SetClientBan", Native_SetClientBan);
-	// CreateNative("TeamBans_DelClientBan", Native_DelClientBan);
+	// CreateNative("TeamBans_DelClientBan", Native_DelClientBan); // TODO
 	
+	CreateNative("TeamBans_GetTeamName", Native_GetTeamName);
+}
+
+void CreateForwards()
+{
 	g_hOnBan = CreateGlobalForward("TeamBans_OnClientBan", ET_Ignore, Param_Cell, Param_Cell, Param_String, Param_Cell, Param_Cell, Param_Cell, Param_String);
 	g_hOnUnban = CreateGlobalForward("TeamBans_OnClientUnban", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
 }
@@ -136,12 +141,9 @@ public int Native_SetClientBan(Handle plugin, int numParams)
 		
 		if (g_iPlayer[client][clientBanned] && g_iPlayer[client][banTeam] > TEAMBANS_SERVER && g_iPlayer[client][banTeam] == team)
 		{
-			char sTeam[12], sTranslation[64], sBuffer[256];
+			char sTeam[TEAMBANS_TEAMNAME_SIZE], sTranslation[64], sBuffer[256];
 			
-			if(team == TEAMBANS_CT)
-				Format(sTeam, sizeof(sTeam), "CT");
-			else if(team == TEAMBANS_T)
-				Format(sTeam, sizeof(sTeam), "T");
+			TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), LANG_SERVER);
 			
 			Format(sTranslation, sizeof(sTranslation), "IsAlready%sBanned", sTeam);
 			Format(sBuffer, sizeof(sBuffer), "%T", sTranslation, admin);
@@ -159,4 +161,42 @@ public int Native_SetClientBan(Handle plugin, int numParams)
 	}
 	else
 		ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is invalid!", client);
+}
+
+public int Native_GetTeamName(Handle plugin, int numParams)
+{
+	int team = GetNativeCell(1);
+	int client = GetNativeCell(4);
+	
+	if(team < TEAMBANS_SERVER || team > TEAMBANS_CT)
+	{
+		int length = GetNativeCell(3);
+		
+		char sBuffer[TEAMBANS_REASON_LENGTH];
+		
+		if(IsClientValid(client) && client != LANG_SERVER)
+		{
+			if(team == TEAMBANS_CT)
+				Format(sBuffer, sizeof(sBuffer), "%T", "CT", client);
+			else if(team == TEAMBANS_T)
+				Format(sBuffer, sizeof(sBuffer), "%T", "T", client);
+			else if (team == TEAMBANS_SERVER)
+				Format(sBuffer, sizeof(sBuffer), "%T", "SERVER", client);
+		}
+		else
+		{
+			if(team == TEAMBANS_CT)
+				Format(sBuffer, sizeof(sBuffer), "%T", "CT", LANG_SERVER);
+			else if(team == TEAMBANS_T)
+				Format(sBuffer, sizeof(sBuffer), "%T", "T", LANG_SERVER);
+			else if (team == TEAMBANS_SERVER)
+				Format(sBuffer, sizeof(sBuffer), "%T", "SERVER", LANG_SERVER);
+		}
+		
+		SetNativeString(2, sBuffer, length);
+	}
+	else
+		ThrowNativeError(SP_ERROR_NATIVE, "Invalid team!");
+	
+	return 0;
 }

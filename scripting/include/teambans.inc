@@ -5,7 +5,7 @@
 
 #define TEAMBANS_PLUGIN_NAME "TeamBans"
 #define TEAMBANS_PLUGIN_AUTHOR "Bara"
-#define TEAMBANS_PLUGIN_VERSION "1.0.0"
+#define TEAMBANS_PLUGIN_VERSION "1.0.1"
 #define TEAMBANS_PLUGIN_DESCRIPTION "With TeamBans you can ban players from a team. (CT and T ban aren't supported)"
 #define TEAMBANS_PLUGIN_URL "www.bara.in"
 
@@ -13,6 +13,7 @@
 #define TEAMBANS_T 2
 #define TEAMBANS_CT 3
 
+#define TEAMBANS_TEAMNAME_SIZE 12
 #define TEAMBANS_REASON_LENGTH 256
 
 native bool TeamBans_IsClientBanned(int client);
@@ -25,7 +26,9 @@ native void TeamBans_GetClientReason(int client, const char[] reason, int maxlen
 native void TeamBans_SetClientBan(int admin, int client, int team, int length, int timeleft, char[] reason);
 native void TeamBans_DelClientBan(int admin, int client);
 
-forward void TeamBans_OnClientBan(int admin, int client, char[] communityid, int team, int length, int timeleft, const char[] reason);
+native void TeamBans_GetTeamName(int team, const char[] name, int maxlength, int language = LANG_SERVER);
+
+forward void TeamBans_OnClientBan(int admin, int client, const char[] communityid ,int team, int length, int timeleft, const char[] reason);
 forward void TeamBans_OnClientUnban(int admin, int client, int team, int length, const char[] reason);
 
 stock bool IsTeamBansLoaded()

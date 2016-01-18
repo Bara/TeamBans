@@ -67,16 +67,13 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 	else if(team == TEAMBANS_SERVER)
 		g_dDB.Query(SQLCallback_SetServerBan, sQuery, GetClientUserId(client), DBPrio_High);
 	
-	char sTeam[6];
+	char sTeam[TEAMBANS_TEAMNAME_SIZE];
 	
 	for (int i = 1; i <= MaxClients; i++)
 	{
 		if (IsClientValid(i))
 		{
-			if(team == TEAMBANS_CT)
-				Format(sTeam, sizeof(sTeam), "%T", "CT", i);
-			else if(team == TEAMBANS_T)
-				Format(sTeam, sizeof(sTeam), "%T", "T", i);
+			TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), i);
 			
 			if(team > TEAMBANS_SERVER)
 			{
@@ -142,7 +139,7 @@ void DelTeamBan(int admin, int client)
 	
 	g_dDB.Query(SQLCallback_DelBan, sQuery, GetClientUserId(client), DBPrio_High);
 	
-	char sTeam[6];
+	char sTeam[TEAMBANS_TEAMNAME_SIZE];
 	
 	if(team != TEAMBANS_SERVER)
 	{
@@ -150,10 +147,7 @@ void DelTeamBan(int admin, int client)
 		{
 			if (IsClientValid(i))
 			{
-				if(team == TEAMBANS_CT)
-					Format(sTeam, sizeof(sTeam), "%T", "CT", i);
-				else if(team == TEAMBANS_T)
-					Format(sTeam, sizeof(sTeam), "%T", "T", i);
+				TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), i);
 				
 				if(length > 0)
 					CShowActivityEx(admin, g_sTag, "%T", "OnTeamUnBan", i, client, length, reason, sTeam);

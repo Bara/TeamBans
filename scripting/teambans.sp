@@ -39,7 +39,7 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 	RegPluginLibrary("teambans");
 	
 	CreateNatives();
-	// CreateForwards();
+	CreateForwards();
 	
 	return APLRes_Success;
 }
