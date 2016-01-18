@@ -75,9 +75,7 @@ public void OnPluginStart()
 	
 	
 	// TODO: all in one?
-	RegAdminCmd("sm_ctban", Command_CTBan, ADMFLAG_BAN, "Online");
-	RegAdminCmd("sm_tban",  Command_TBan,  ADMFLAG_BAN, "Online");
-	RegAdminCmd("sm_sban",  Command_SBan,  ADMFLAG_BAN, "Online");
+	RegAdminCmd("sm_ban", Command_Ban, ADMFLAG_BAN, "Online");
 	RegAdminCmd("sm_oban",  Command_OBan,  ADMFLAG_BAN, "Offline");
 	
 	// TODO: all in one?

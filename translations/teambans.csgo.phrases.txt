@@ -93,11 +93,11 @@
 		"de"		"[{1}] {2} (permanent)"
 	}
 
-	"CTBanSyntax"
+	"BanSyntax"
 	{
 		"#format"	"{1:s}"
-		"en"		"{1} Usage: {darkred}sm_ctban <#userid|name> {lightgreen}[length (minutes)] [reason]"
-		"de"		"{1} Benutzung: {darkred}sm_ctban <#userID|Name> {lightgreen}[Laenge (Minuten)] [Grund]"
+		"en"		"{1} Usage: {darkred}sm_ctban <#userid|name> <team> {lightgreen}[length (minutes)] [reason]"
+		"de"		"{1} Benutzung: {darkred}sm_ctban <#userID|Name> <team> {lightgreen}[Laenge (Minuten)] [Grund]"
 	}
 
 	"CTUnBanSyntax"
@@ -106,26 +106,12 @@
 		"en"		"{1} Usage: {darkred}sm_ctunban <#userid|name>"
 		"de"		"{1} Benutzung: {darkred}sm_ctunban <#userID|Name>"
 	}
-	
-	"TBanSyntax"
-	{
-		"#format"	"{1:s}"
-		"en"		"{1} Usage: {darkred}sm_tban <#userid|name> {lightgreen}[length (minutes)] [reason]"
-		"de"		"{1} Benutzung: {darkred}sm_tban <#userID|Name> {lightgreen}[Laenge (Minuten)] [Grund]"
-	}
 
 	"TUnBanSyntax"
 	{
 		"#format"	"{1:s}"
 		"en"		"{1} Usage: {darkred}sm_tunban <#userid|name>"
 		"de"		"{1} Benutzung: {darkred}sm_tunban <#userID|Name>"
-	}
-	
-	"SBanSyntax"
-	{
-		"#format"	"{1:s}"
-		"en"		"{1} Usage: {darkred}sm_sban <#userid|name> {lightgreen}[length (minutes)] [reason]"
-		"de"		"{1} Benutzung: {darkred}sm_sban <#userID|Name> {lightgreen}[Laenge (Minuten)] [Grund]"
 	}
 
 	"OnTeamBan"
