@@ -2,7 +2,7 @@ TeamBans:
   script:
     - wget http://www.sourcemod.net/smdrop/1.8/sourcemod-1.8.0-git5709-linux.tar.gz
     - tar xzf sourcemod-1.8.0-git5709-linux.tar.gz
-    - git clone https://github.com/Bara20/Multi-Colors.git multicolors
+    - git clone http://git.tf/Bara/Multi-Colors.git multicolors
     - cp -Ru multicolors/addons/sourcemod/scripting/include/ addons/sourcemod/scripting/
     - rm -r multicolors
     - cp -Ru scripting/ addons/sourcemod/
