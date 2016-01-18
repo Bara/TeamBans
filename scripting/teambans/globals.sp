@@ -43,6 +43,9 @@ enum Data
 enum Cvars
 {
 	ConVar:pluginDebug,
+	ConVar:enableTBan,
+	ConVar:enableCTBan,
+	ConVar:enableServerBan,
 	ConVar:pluginTag,
 	ConVar:logLevel,
 	ConVar:playerChecks,

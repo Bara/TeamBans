@@ -11,9 +11,14 @@ public void OnAdminMenuReady(Handle aTopmenu)
 
 	if(TM_TeamBans != INVALID_TOPMENUOBJECT)
 	{
-		g_tTopMenu.AddItem("sm_ctban", AdminMenu_CTBan, TM_TeamBans, "sm_ctban", ADMFLAG_BAN);
-		g_tTopMenu.AddItem("sm_tban", AdminMenu_TBan, TM_TeamBans, "sm_tban", ADMFLAG_BAN);
-		g_tTopMenu.AddItem("sm_sban", AdminMenu_SBan, TM_TeamBans, "sm_sban", ADMFLAG_BAN);
+		if(g_iCvar[enableCTBan].BoolValue)
+			g_tTopMenu.AddItem("sm_ctban", AdminMenu_CTBan, TM_TeamBans, "sm_ctban", ADMFLAG_BAN);
+		
+		if(g_iCvar[enableTBan].BoolValue)
+			g_tTopMenu.AddItem("sm_tban", AdminMenu_TBan, TM_TeamBans, "sm_tban", ADMFLAG_BAN);
+		
+		if(g_iCvar[enableServerBan].BoolValue)
+			g_tTopMenu.AddItem("sm_sban", AdminMenu_SBan, TM_TeamBans, "sm_sban", ADMFLAG_BAN);
 	}
 	else
 		return;

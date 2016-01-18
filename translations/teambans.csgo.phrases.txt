@@ -230,4 +230,11 @@
 		"en"		"TeamBans"
 		"de"		"TeamBans"
 	}
+	
+	"CommandDisabled"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} This Command is currently disabled!"
+		"de"		"{1} Dieser Befehl ist derzeit deaktivier!"
+	}
 }

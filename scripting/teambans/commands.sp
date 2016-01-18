@@ -95,6 +95,12 @@ public int Menu_Block(Menu menu, MenuAction action, int client, int param)
 
 public Action Command_SetCTBan(int client, int args)
 {
+	if(!g_iCvar[enableCTBan].BoolValue)
+	{
+		CReplyToCommand(client, "%T", "CommandDisabled", client, g_sTag);
+		return Plugin_Handled;
+	}
+	
 	if (args < 1)
 	{
 		CReplyToCommand(client, "%T", "CTBanSyntax", client, g_sTag);
@@ -184,7 +190,7 @@ public Action Command_SetCTBan(int client, int args)
 			SetTeamBan(client, target, TEAMBANS_CT, iLength, iLength, sReason);
 		else
 		{
-			if(GetClientBanTeam(client) == TEAMBANS_CT)
+			if(GetClientBanTeam(target) == TEAMBANS_CT)
 			{
 				CReplyToCommand(client, "%T", "IsAlreadyCTBanned", client, g_sTag);
 				return Plugin_Handled;
@@ -198,6 +204,12 @@ public Action Command_SetCTBan(int client, int args)
 
 public Action Command_SetTBan(int client, int args)
 {
+	if(!g_iCvar[enableTBan].BoolValue)
+	{
+		CReplyToCommand(client, "%T", "CommandDisabled", client, g_sTag);
+		return Plugin_Handled;
+	}
+	
 	if (args < 1)
 	{
 		CReplyToCommand(client, "%T", "TBanSyntax", client, g_sTag);
@@ -287,7 +299,7 @@ public Action Command_SetTBan(int client, int args)
 			SetTeamBan(client, target, TEAMBANS_T, iLength, iLength, sReason);
 		else
 		{
-			if(GetClientBanTeam(client) == TEAMBANS_T)
+			if(GetClientBanTeam(target) == TEAMBANS_T)
 			{
 				CReplyToCommand(client, "%T", "IsAlreadyTBanned", client, g_sTag);
 				return Plugin_Handled;
@@ -301,6 +313,12 @@ public Action Command_SetTBan(int client, int args)
 
 public Action Command_SetSBan(int client, int args)
 {
+	if(!g_iCvar[enableServerBan].BoolValue)
+	{
+		CReplyToCommand(client, "%T", "CommandDisabled", client, g_sTag);
+		return Plugin_Handled;
+	}
+	
 	if (args < 1)
 	{
 		CReplyToCommand(client, "%T", "SBanSyntax", client, g_sTag);

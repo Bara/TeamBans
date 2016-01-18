@@ -4,6 +4,10 @@ stock void Cvar_OnPluginStart()
 	
 	g_iCvar[pluginDebug] = CreateConVar("teambans_enable_debug", "1", "Enable debugging?", _, true, 0.0, true, 1.0);
 	
+	g_iCvar[enableTBan] = CreateConVar("teambans_enable_tban", "1", "Enable 'T'-Ban?", _, true, 0.0, true, 1.0);
+	g_iCvar[enableCTBan] = CreateConVar("teambans_enable_ctban", "1", "Enable 'CT'-Ban?", _, true, 0.0, true, 1.0);
+	g_iCvar[enableServerBan] = CreateConVar("teambans_enable_serverban", "1", "Enable 'Server'-Ban?", _, true, 0.0, true, 1.0);
+	
 	if(GetEngineVersion() == Engine_CSS)
 		g_iCvar[pluginTag] = CreateConVar("teambans_plugin_tag", "{azure}[TeamBans] {white}", "Choose the plugin tag for this plugin");
 	else if(GetEngineVersion() == Engine_CSGO)
@@ -30,4 +34,8 @@ public void OnConfigsExecuted()
 	CreateTimer(g_iCvar[playerChecks].FloatValue, Timer_CheckClients, _, TIMER_REPEAT | TIMER_FLAG_NO_MAPCHANGE);
 	
 	g_iCvar[pluginTag].GetString(g_sTag, sizeof(g_sTag));
+	
+	TopMenu tTopMenu;
+	if (LibraryExists("adminmenu") && ((tTopMenu = GetAdminTopMenu()) != null))
+		OnAdminMenuReady(tTopMenu);
 }

@@ -108,6 +108,15 @@ public int Native_SetClientBan(Handle plugin, int numParams)
 	int timeleft = GetNativeCell(5);
 	GetNativeString(6, reason, TEAMBANS_REASON_LENGTH);
 	
+	if(team == TEAMBANS_CT && g_iCvar[enableCTBan].BoolValue)
+		ThrowNativeError(SP_ERROR_NATIVE, "CT-Ban disabled!", client);
+	
+	if(team == TEAMBANS_T && !g_iCvar[enableTBan].BoolValue)
+		ThrowNativeError(SP_ERROR_NATIVE, "T-Ban disabled!", client);
+	
+	if(team == TEAMBANS_SERVER && !g_iCvar[enableServerBan].BoolValue)
+		ThrowNativeError(SP_ERROR_NATIVE, "Server-Ban disabled!", client);
+	
 	if(IsClientValid(client))
 	{
 		char sCommunityID[64], sACommunityID[64];
