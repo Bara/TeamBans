@@ -35,7 +35,7 @@ public Action Command_TeamBans(int client, int args)
 
 					char sName[MAX_NAME_LENGTH], sTeam[TEAMBANS_TEAMNAME_SIZE];
 					
-					TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), client);
+					TeamBans_GetTeamName(TeamBans_GetClientTeam(i), sTeam, sizeof(sTeam), client);
 					
 					if(g_iPlayer[i][banLength] > 0)
 						Format(sName, sizeof(sName), "%T", "TeamBansListPlayer", client, sTeam, i, g_iPlayer[i][banTimeleft], g_iPlayer[i][banLength]);
@@ -74,7 +74,7 @@ public int Menu_Block(Menu menu, MenuAction action, int client, int param)
 		{
 			char sTeam[TEAMBANS_TEAMNAME_SIZE];
 			
-			TeamBans_GetTeamName(team, sTeam, sizeof(sTeam), client);
+			TeamBans_GetTeamName(TeamBans_GetClientTeam(target), sTeam, sizeof(sTeam), client);
 
 			if(g_iPlayer[target][banLength] > 0)
 				CPrintToChat(client, "%T", "TeamBansInfo", client, g_sTag, target, g_iPlayer[target][banLength], g_iPlayer[target][banTimeleft], g_iPlayer[target][banReason], sTeam);
