@@ -27,6 +27,7 @@ native void TeamBans_SetClientBan(int admin, int client, int team, int length, i
 native void TeamBans_DelClientBan(int admin, int client);
 
 native void TeamBans_GetTeamName(int team, const char[] name, int maxlength, int language = LANG_SERVER);
+native int TeamBans_GetTeamNumber(char[] team);
 
 forward void TeamBans_OnClientBan(int admin, int client, int team, int length, int timeleft, const char[] reason);
 forward void TeamBans_OnClientOfflineBan(int admin, const char[] communityid ,int team, int length, int timeleft, const char[] reason);

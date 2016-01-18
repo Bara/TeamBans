@@ -530,13 +530,7 @@ public Action Command_OBan(int client, int args)
 	char team[TEAMBANS_TEAMNAME_SIZE];
 	GetCmdArg(2, team, sizeof(team));
 	
-	int iTeam;
-	if(StrEqual(team, "server", false))
-		iTeam = TEAMBANS_SERVER;
-	else if(StrEqual(team, "ct", false))
-		iTeam = TEAMBANS_CT;
-	else if(StrEqual(team, "t", false))
-		iTeam = TEAMBANS_T;
+	int iTeam = TeamBans_GetTeamNumber(team);
 	
 	// Get length
 	char length[12];

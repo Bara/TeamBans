@@ -11,6 +11,7 @@ void CreateNatives()
 	// CreateNative("TeamBans_DelClientBan", Native_DelClientBan); // TODO
 	
 	CreateNative("TeamBans_GetTeamName", Native_GetTeamName);
+	CreateNative("TeamBans_GetTeamNumber", Native_GetTeamNumber);
 }
 
 void CreateForwards()
@@ -199,5 +200,19 @@ public int Native_GetTeamName(Handle plugin, int numParams)
 	else
 		ThrowNativeError(SP_ERROR_NATIVE, "Invalid team!");
 	
+	return 0;
+}
+
+public int Native_GetTeamNumber(Handle plugin, int numParams)
+{
+	char sTeam[TEAMBANS_TEAMNAME_SIZE];
+	GetNativeString(1, sTeam, sizeof(sTeam));
+	
+	if(StrEqual(sTeam, "server", false))
+		return TEAMBANS_SERVER;
+	else if(StrEqual(sTeam, "ct", false))
+		return TEAMBANS_CT;
+	else if(StrEqual(sTeam, "t", false))
+		return TEAMBANS_T;
 	return 0;
 }

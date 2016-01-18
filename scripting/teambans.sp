@@ -1,3 +1,12 @@
+/*
+
+	- Add command for offline unban
+	- Add native for unban
+	- Add native for offline ban
+	- Add native for offline unban
+
+*/
+
 #pragma semicolon 1
 
 // Core
