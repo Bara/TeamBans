@@ -64,13 +64,17 @@ public void OnPluginStart()
 	
 	RegConsoleCmd("sm_teambans", Command_TeamBans);
 	
-	RegAdminCmd("sm_ctban", Command_SetCTBan, ADMFLAG_BAN);
-	RegAdminCmd("sm_tban", Command_SetTBan, ADMFLAG_BAN);
-	RegAdminCmd("sm_sban", Command_SetSBan, ADMFLAG_BAN);
 	
-	RegAdminCmd("sm_ctunban", Command_DelCTBan, ADMFLAG_UNBAN);
-	RegAdminCmd("sm_tunban", Command_DelTBan, ADMFLAG_UNBAN);
-
+	// TODO: all in one?
+	RegAdminCmd("sm_ctban", Command_CTBan, ADMFLAG_BAN, "Online");
+	RegAdminCmd("sm_tban",  Command_TBan,  ADMFLAG_BAN, "Online");
+	RegAdminCmd("sm_sban",  Command_SBan,  ADMFLAG_BAN, "Online");
+	RegAdminCmd("sm_oban",  Command_OBan,  ADMFLAG_BAN, "Offline");
+	
+	// TODO: all in one?
+	RegAdminCmd("sm_ctunban", Command_DelCTBan, ADMFLAG_UNBAN, "Online");
+	RegAdminCmd("sm_tunban",  Command_DelTBan,  ADMFLAG_UNBAN, "Online");
+	
 	AddCommandListener(Command_JoinTeam, "jointeam");
 	
 	HookEvent("player_spawn", Event_PlayerSpawn);

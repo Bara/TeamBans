@@ -93,7 +93,7 @@ public int Menu_Block(Menu menu, MenuAction action, int client, int param)
 	}
 }
 
-public Action Command_SetCTBan(int client, int args)
+public Action Command_CTBan(int client, int args)
 {
 	if(!g_iCvar[enableCTBan].BoolValue)
 	{
@@ -202,7 +202,7 @@ public Action Command_SetCTBan(int client, int args)
 	return Plugin_Continue;
 }
 
-public Action Command_SetTBan(int client, int args)
+public Action Command_TBan(int client, int args)
 {
 	if(!g_iCvar[enableTBan].BoolValue)
 	{
@@ -311,7 +311,7 @@ public Action Command_SetTBan(int client, int args)
 	return Plugin_Continue;
 }
 
-public Action Command_SetSBan(int client, int args)
+public Action Command_SBan(int client, int args)
 {
 	if(!g_iCvar[enableServerBan].BoolValue)
 	{
@@ -511,5 +511,77 @@ public Action Command_DelTBan(int client, int args)
 			return Plugin_Handled;
 		}
 	}
+	return Plugin_Continue;
+}
+
+public Action Command_OBan(int client, int args)
+{
+	if(!g_iCvar[enableTBan].BoolValue)
+	{
+		CReplyToCommand(client, "%T", "CommandDisabled", client, g_sTag);
+		return Plugin_Handled;
+	}
+	
+	if (args < 1)
+	{
+		CReplyToCommand(client, "%T", "OBanSyntax", client, g_sTag);
+		return Plugin_Handled;
+	}
+	
+	// Get communityid
+	char target[18];
+	GetCmdArg(1, target, sizeof(target));
+	
+	// Get team
+	char team[12];
+	GetCmdArg(2, team, sizeof(team));
+	
+	int iTeam;
+	if(StrEqual(team, "server", false))
+		iTeam = TEAMBANS_SERVER;
+	else if(StrEqual(team, "ct", false))
+		iTeam = TEAMBANS_CT;
+	else if(StrEqual(team, "t", false))
+		iTeam = TEAMBANS_T;
+	
+	// Get length
+	char length[12];
+	GetCmdArg(3, length, sizeof(length));
+	
+	int iLength;
+	
+	if(args == 1)
+	{
+		char sDLength[12];
+		g_iCvar[defaultBanLength].GetString(sDLength, sizeof(sDLength));
+		iLength = StringToInt(sDLength);
+	}
+	else
+		iLength = StringToInt(length);
+	
+	if(iLength < 0)
+	{
+		CReplyToCommand(client, "%T", "OBanSyntax", client, g_sTag);
+		return Plugin_Handled;
+	}
+	
+	// Get Reason
+	char sReason[128], sBuffer[128];
+	if(args <= 3)
+	{
+		char sTBuffer[32];
+		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
+		Format(sReason, sizeof(sReason), "%T", sTBuffer, LANG_SERVER);
+	}
+	else 
+	{
+		for (int i = 4; i <= args; i++)
+		{
+			GetCmdArg(i, sBuffer, sizeof(sBuffer));
+			Format(sReason, sizeof(sReason), "%s %s", sReason , sBuffer);
+		}
+	}
+
+	CheckOfflineBans(client, target, iTeam, iLength, sReason);
 	return Plugin_Continue;
 }

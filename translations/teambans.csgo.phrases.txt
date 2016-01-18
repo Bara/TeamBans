@@ -44,7 +44,14 @@
 		"en"		"{1} Target player already has a {darkred}T Ban{lightgreen}!"
 		"de"		"{1} Der ausgewählte Spieler ist bereits vom {darkred}T Team {lightgreen}gebannt!"
 	}
-
+	
+	"IsAlreadyServerBanned"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Target player already has a {darkred}Server Ban{lightgreen}!"
+		"de"		"{1} Der ausgewählte Spieler ist bereits vom {darkred}Server {lightgreen}gebannt!"
+	}
+	
 	"IsntCTBanned"
 	{
 		"#format"	"{1:s}"
@@ -120,6 +127,13 @@
 		"en"		"{darkred}{1} {lightgreen}was banned from the {darkred}{2} team{lightgreen}! (Length is {darkred}{3} minutes {lightgreen}with the reason: {darkred}{4}{lightgreen})"
 		"de"		"{darkred}{1} {lightgreen}wurde vom {darkred}{2} Team {lightgreen}gebannt! (Länge beträgt {darkred}{3} Minuten {lightgreen}mit dem Grund: {darkred}{4}{lightgreen})"
 	}
+	
+	"OnTeamOBan"
+	{
+		"#format"	"{1:s},{2:s},{3:d},{4:s}"
+		"en"		"{lightgreen}The ID {darkred}{1} {lightgreen}was banned from the {darkred}{2} team{lightgreen}! (Length is {darkred}{3} minutes {lightgreen}with the reason: {darkred}{4}{lightgreen})"
+		"de"		"{lightgreen}Die ID {darkred}{1} {lightgreen}wurde vom {darkred}{2} Team {lightgreen}gebannt! (Länge beträgt {darkred}{3} Minuten {lightgreen}mit dem Grund: {darkred}{4}{lightgreen})"
+	}
 
 	"OnTeamBanPerma"
 	{
@@ -128,11 +142,25 @@
 		"de"		"{darkred}{1} {lightgreen}wurde {darkred}permanent {lightgreen}vom {darkred}{2} Team {lightgreen}gebannt! (Grund: {darkred}{3}{lightgreen})"
 	}
 	
+	"OnTeamOBanPerma"
+	{
+		"#format"	"{1:s},{2:s},{3:s}"
+		"en"		"{lightgreen}The ID {darkred}{1} {lightgreen}was {darkred}permanently {lightgreen}banned from the {darkred}{2} team{lightgreen}! (Reason: {darkred}{3}{lightgreen})"
+		"de"		"{lightgreen}Die ID {darkred}{1} {lightgreen}wurde {darkred}permanent {lightgreen}vom {darkred}{2} Team {lightgreen}gebannt! (Grund: {darkred}{3}{lightgreen})"
+	}
+	
 	"OnServerBan"
 	{
 		"#format"	"{1:N},{2:s},{3:d},{4:s}"
 		"en"		"{darkred}{1} {lightgreen}was banned from the {darkred}server{lightgreen}! (Length is {darkred}{3} minutes {lightgreen}with the reason: {darkred}{4}{lightgreen})"
 		"de"		"{darkred}{1} {lightgreen}wurde vom {darkred}Server {lightgreen}gebannt! (Länge beträgt {darkred}{3} Minuten {lightgreen}mit dem Grund: {darkred}{4}{lightgreen})"
+	}
+	
+	"OnServerOBan"
+	{
+		"#format"	"{1:s},{2:s},{3:d},{4:s}"
+		"en"		"{lightgreen}The ID {darkred}{1} {lightgreen}was banned from the {darkred}server{lightgreen}! (Length is {darkred}{3} minutes {lightgreen}with the reason: {darkred}{4}{lightgreen})"
+		"de"		"{lightgreen}Die ID {darkred}{{1} {lightgreen}wurde vom {darkred}Server {lightgreen}gebannt! (Länge beträgt {darkred}{3} Minuten {lightgreen}mit dem Grund: {darkred}{4}{lightgreen})"
 	}
 
 	"OnServerBanPerma"
@@ -140,6 +168,13 @@
 		"#format"	"{1:N},{2:s},{3:s}"
 		"en"		"{darkred}{1} {lightgreen}was {darkred}permanently {lightgreen}banned from the {darkred}server{lightgreen}! (Reason: {darkred}{3}{lightgreen})"
 		"de"		"{darkred}{1} {lightgreen}wurde {darkred}permanent {lightgreen}vom {darkred}Server {lightgreen}gebannt! (Grund: {darkred}{3}{lightgreen})"
+	}
+	
+	"OnServerOBanPerma"
+	{
+		"#format"	"{1:s},{2:s},{3:s}"
+		"en"		"{lightgreen}The ID {darkred}{1} {lightgreen}was {darkred}permanently {lightgreen}banned from the {darkred}server{lightgreen}! (Reason: {darkred}{3}{lightgreen})"
+		"de"		"{lightgreen}Die ID {darkred}{1} {lightgreen}wurde {darkred}permanent {lightgreen}vom {darkred}Server {lightgreen}gebannt! (Grund: {darkred}{3}{lightgreen})"
 	}
 
 	"OnTeamUnBan"
@@ -236,5 +271,12 @@
 		"#format"	"{1:s}"
 		"en"		"{1} This Command is currently disabled!"
 		"de"		"{1} Dieser Befehl ist derzeit deaktivier!"
+	}
+	
+	"OBanSyntax"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Usage: {darkred}sm_oban <communityid> <team> <length>"
+		"de"		"{1} Benutzung: {darkred}sm_oban <communityid> <team> <laenge>"
 	}
 }

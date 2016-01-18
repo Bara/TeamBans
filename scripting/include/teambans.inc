@@ -25,7 +25,7 @@ native void TeamBans_GetClientReason(int client, const char[] reason, int maxlen
 native void TeamBans_SetClientBan(int admin, int client, int team, int length, int timeleft, char[] reason);
 native void TeamBans_DelClientBan(int admin, int client);
 
-forward void TeamBans_OnClientBan(int admin, int client, int team, int length, int timeleft, const char[] reason);
+forward void TeamBans_OnClientBan(int admin, int client, char[] communityid, int team, int length, int timeleft, const char[] reason);
 forward void TeamBans_OnClientUnban(int admin, int client, int team, int length, const char[] reason);
 
 stock bool IsTeamBansLoaded()

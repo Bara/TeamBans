@@ -62,3 +62,14 @@ public void SQLCallback_Create(Database db, DBResultSet results, const char[] er
 		return;
 	}
 }
+
+public void SQLCallback_OBan(Database db, DBResultSet results, const char[] error, any userid)
+{
+	if(db == null || strlen(error) > 0)
+	{
+		if(GetLogLevel() >= view_as<int>(ERROR))
+			TB_LogFile(ERROR,  "(SQLCallback_OBan) Query failed: %s", error);
+		return;
+	}
+}
+

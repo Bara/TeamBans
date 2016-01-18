@@ -55,6 +55,7 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 	Call_StartForward(g_hOnBan);
 	Call_PushCell(admin);
 	Call_PushCell(client);
+	Call_PushString(sCommunityID);
 	Call_PushCell(team);
 	Call_PushCell(length);
 	Call_PushCell(timeleft);
@@ -160,5 +161,27 @@ void DelTeamBan(int admin, int client)
 					CShowActivityEx(admin, g_sTag, "%T", "OnTeamUnBanPerma", i,  client, reason, sTeam);
 			}
 		}
+	}
+}
+
+void CheckOfflineBans(int admin, char[] target,  int team, int length, char[] reason)
+{
+	char sQuery[2048];
+	Format(sQuery, sizeof(sQuery), QUERY_SELECT_BAN, target);
+	
+	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
+		TB_LogFile(DEBUG, "[TeamBans] (CheckOfflineBans) %s", sQuery);
+	
+	if(g_dDB != null)
+	{
+		DataPack pack = new DataPack();
+		
+		pack.WriteCell(GetClientUserId(admin));
+		pack.WriteString(target);
+		pack.WriteCell(team);
+		pack.WriteCell(length);
+		pack.WriteString(reason);
+		
+		g_dDB.Query(SQL_CheckOfflineBans, sQuery, pack, DBPrio_High);
 	}
 }

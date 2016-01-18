@@ -10,7 +10,7 @@ void CreateNatives()
 	CreateNative("TeamBans_SetClientBan", Native_SetClientBan);
 	// CreateNative("TeamBans_DelClientBan", Native_DelClientBan);
 	
-	g_hOnBan = CreateGlobalForward("TeamBans_OnClientBan", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
+	g_hOnBan = CreateGlobalForward("TeamBans_OnClientBan", ET_Ignore, Param_Cell, Param_Cell, Param_String, Param_Cell, Param_Cell, Param_Cell, Param_String);
 	g_hOnUnban = CreateGlobalForward("TeamBans_OnClientUnban", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
 }
 
