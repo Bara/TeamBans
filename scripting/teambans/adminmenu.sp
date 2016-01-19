@@ -26,9 +26,7 @@ public void OnAdminMenuReady(Handle aTopmenu)
 
 public void Category_Handler(Handle topmenu, TopMenuAction action, TopMenuObject topobj_id, int client, char[] buffer, int maxlength)
 {
-	if(action == TopMenuAction_DisplayTitle)
-		Format(buffer, maxlength, "%T", "TeamBansAdminMenuTitle", client);
-	else if(action == TopMenuAction_DisplayOption)
+	if(action == TopMenuAction_DisplayTitle || action == TopMenuAction_DisplayOption)
 		Format(buffer, maxlength, "%T", "TeamBansAdminMenuTitle", client);
 }
 
