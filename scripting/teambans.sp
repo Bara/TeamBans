@@ -81,9 +81,7 @@ public void OnPluginStart()
 	RegAdminCmd("sm_ban", Command_Ban, ADMFLAG_BAN, "Online");
 	RegAdminCmd("sm_oban",  Command_OBan,  ADMFLAG_BAN, "Offline");
 	
-	// TODO: all in one?
-	RegAdminCmd("sm_ctunban", Command_DelCTBan, ADMFLAG_UNBAN, "Online");
-	RegAdminCmd("sm_tunban",  Command_DelTBan,  ADMFLAG_UNBAN, "Online");
+	RegAdminCmd("sm_unban", Command_UnBan, ADMFLAG_UNBAN, "Online");
 	
 	AddCommandListener(Command_JoinTeam, "jointeam");
 	

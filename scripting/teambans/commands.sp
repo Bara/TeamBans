@@ -182,7 +182,7 @@ public Action Command_Ban(int client, int args)
  			Format(sACommunityID, sizeof(sACommunityID), "0");
  		
  		if(GetLogLevel() >= view_as<int>(INFO))
-			TB_LogFile(INFO, "[TeamBans] (Command_SetCTBan) Admin: \"%L\" %s - Player: \"%L\" %s - Length: %d - Reason: %s", client, sACommunityID, target, sCommunityID, iLength, sReason);
+			TB_LogFile(INFO, "[TeamBans] (Command_SetCTBan) Admin: \"%L\" %s - Player: \"%L\" %s - Length: %d - Team: %s - Reason: %s", client, sACommunityID, target, sCommunityID, iLength, sTeam, sReason);
 		
 		// Only one team ban/person
 		if (iTeam == TEAMBANS_SERVER || (iTeam > TEAMBANS_SERVER && !HasClientTeamBan(target)))
@@ -208,23 +208,33 @@ public Action Command_Ban(int client, int args)
 	return Plugin_Continue;
 }
 
-public Action Command_DelCTBan(int client, int args)
+public Action Command_UnBan(int client, int args)
 {
 	if (args != 1)
 	{
-		CReplyToCommand(client, "%T", "CTUnBanSyntax", client, g_sTag);
+		CReplyToCommand(client, "%T", "UnBanSyntax", client, g_sTag);
 		return Plugin_Handled;
 	}
 
-	char sArg1[MAX_NAME_LENGTH];
-	GetCmdArg(1, sArg1, sizeof(sArg1));
+	char player[MAX_NAME_LENGTH];
+	GetCmdArg(1, player, sizeof(player));
+	
+	char sTeam[TEAMBANS_TEAMNAME_SIZE];
+	GetCmdArg(2, sTeam, sizeof(sTeam));
+	int iTeam = TeamBans_GetTeamNumberByName(sTeam);
+	
+	if(iTeam == TEAMBANS_SERVER)
+	{
+		CReplyToCommand(client, "%T", "UnbanServerOnline", client, g_sTag);
+		return Plugin_Handled;
+	}
 
 	char target_name[MAX_TARGET_LENGTH];
 	int target_list[MAXPLAYERS];
 	int target_count;
 	bool tn_is_ml;
 
-	if ((target_count = ProcessTargetString(sArg1, client, target_list, MAXPLAYERS, COMMAND_FILTER_CONNECTED, target_name, sizeof(target_name), tn_is_ml)) <= 0)
+	if ((target_count = ProcessTargetString(player, client, target_list, MAXPLAYERS, COMMAND_FILTER_CONNECTED, target_name, sizeof(target_name), tn_is_ml)) <= 0)
 	{
 		ReplyToTargetError(client, target_count);
 		return Plugin_Handled;
@@ -242,7 +252,7 @@ public Action Command_DelCTBan(int client, int args)
  			return Plugin_Handled;
  		
  		if(GetLogLevel() >= view_as<int>(INFO))
-			TB_LogFile(INFO, "[TeamBans] (Command_DelCTBan) Admin: \"%L\" %s - Player: \"%L\" %s", client, sACommunityID, target, sCommunityID);
+			TB_LogFile(INFO, "[TeamBans] (Command_UnBan) Admin: \"%L\" %s - Player: \"%L\" %s - Team: %s", client, sACommunityID, target, sCommunityID, sTeam);
 
 		if (!IsClientValid(target))
 		{
@@ -250,64 +260,14 @@ public Action Command_DelCTBan(int client, int args)
 			return Plugin_Handled;
 		}
 
-		if (HasClientTeamBan(target) && GetClientBanTeam(client) == TEAMBANS_CT)
+		if (HasClientTeamBan(target) && GetClientBanTeam(client) == iTeam)
 			DelTeamBan(client, target);
 		else
 		{
-			CReplyToCommand(client, "%T", "IsntCTBanned", client, g_sTag);
-			return Plugin_Handled;
-		}
-	}
-	return Plugin_Continue;
-}
-
-public Action Command_DelTBan(int client, int args)
-{
-	if (args != 1)
-	{
-		CReplyToCommand(client, "%T", "TUnBanSyntax", client, g_sTag);
-		return Plugin_Handled;
-	}
-
-	char sArg1[MAX_NAME_LENGTH];
-	GetCmdArg(1, sArg1, sizeof(sArg1));
-
-	char target_name[MAX_TARGET_LENGTH];
-	int target_list[MAXPLAYERS];
-	int target_count;
-	bool tn_is_ml;
-
-	if ((target_count = ProcessTargetString(sArg1, client, target_list, MAXPLAYERS, COMMAND_FILTER_CONNECTED, target_name, sizeof(target_name), tn_is_ml)) <= 0)
-	{
-		ReplyToTargetError(client, target_count);
-		return Plugin_Handled;
-	}
-
-	for (int i = 0; i < target_count; i++)
-	{
-		int target = target_list[i];
-		
-		char sCommunityID[64], sACommunityID[64];
- 		if(!GetClientAuthId(target, AuthId_SteamID64, sCommunityID, sizeof(sCommunityID)))
- 			return Plugin_Handled;
- 		
- 		if(!GetClientAuthId(client, AuthId_SteamID64, sACommunityID, sizeof(sACommunityID)))
- 			return Plugin_Handled;
- 		
- 		if(GetLogLevel() >= view_as<int>(INFO))
-			TB_LogFile(INFO, "[TeamBans] (Command_DelTBan) Admin: \"%L\" %s - Player: \"%L\" %s", client, sACommunityID, target, sCommunityID);
-
-		if (!IsClientValid(target))
-		{
-			CReplyToCommand(client, "%T", "Invalid", client);
-			return Plugin_Handled;
-		}
-
-		if (HasClientTeamBan(target) && GetClientBanTeam(client) == TEAMBANS_T)
-			DelTeamBan(client, target);
-		else
-		{
-			CReplyToCommand(client, "%T", "IsntTBanned", client, g_sTag);
+			if(iTeam == TEAMBANS_CT)
+				CReplyToCommand(client, "%T", "IsntCTBanned", client, g_sTag);
+			else if(iTeam == TEAMBANS_T)
+				CReplyToCommand(client, "%T", "IsntTBanned", client, g_sTag);
 			return Plugin_Handled;
 		}
 	}

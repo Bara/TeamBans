@@ -37,6 +37,12 @@
 		"en"		"Target player is invalid!"
 		"de"		"Ungültiger Spieler!"
 	}
+	
+	"UnbanServerOnline"
+	{
+		"en"		"Please use sm_oban to remove a server-ban!"
+		"de"		"Bitte benutzen Sie sm_oban um einen Server-Ban zu entfernen!"
+	}
 
 	"IsAlreadyCTBanned"
 	{
@@ -100,18 +106,11 @@
 		"de"		"{1} Benutzung: {firebrick}sm_ban <#userID|Name> <team> {white}[Laenge (Minuten)] [Grund]"
 	}
 
-	"CTUnBanSyntax"
+	"UnBanSyntax"
 	{
 		"#format"	"{1:s}"
-		"en"		"{1} Usage: {firebrick}sm_ctunban <#userid|name>"
-		"de"		"{1} Benutzung: {firebrick}sm_ctunban <#userID|Name>"
-	}
-
-	"TUnBanSyntax"
-	{
-		"#format"	"{1:s}"
-		"en"		"{1} Usage: {firebrick}sm_tunban <#userid|name>"
-		"de"		"{1} Benutzung: {firebrick}sm_tunban <#userID|Name>"
+		"en"		"{1} Usage: {firebrick}sm_unban <#userid|name>"
+		"de"		"{1} Benutzung: {firebrick}sm_unban <#userID|Name>"
 	}
 
 	"OnTeamBan"
