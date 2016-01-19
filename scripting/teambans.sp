@@ -74,7 +74,6 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_teambans", Command_TeamBans);
 	
 	
-	// TODO: all in one?
 	RegAdminCmd("sm_ban", Command_Ban, ADMFLAG_BAN, "Online");
 	RegAdminCmd("sm_oban",  Command_OBan,  ADMFLAG_BAN, "Offline");
 	
@@ -131,5 +130,5 @@ public Action Event_PlayerSpawn(Event event, const char[] name, bool dontBroadca
 	if (!IsClientValid(client) || !g_iPlayer[client][clientReady])
 		return;
 	
-	IsAndMoveClient(client);
+	IsAndMoveClient(client, TeamBans_GetClientTeam(client));
 }

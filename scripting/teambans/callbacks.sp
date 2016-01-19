@@ -10,7 +10,7 @@ public void SQLCallback_SetBan(Database db, DBResultSet results, const char[] er
 	
 	if (IsClientValid(client))
 	{
-		IsAndMoveClient(client);
+		IsAndMoveClient(client, TeamBans_GetClientTeam(client));
 		CheckTeamBans(client);
 	}
 }

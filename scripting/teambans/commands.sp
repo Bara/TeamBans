@@ -7,7 +7,7 @@ public Action Command_JoinTeam(int client, const char[] command, int args)
 	GetCmdArg(1, sTeam, sizeof(sTeam));
 	int iTeam = StringToInt(sTeam);
 	
-	if(IsAndMoveClient_JoinTeam(client, iTeam))
+	if(IsAndMoveClient(client, TeamBans_GetClientTeam(client), iTeam))
 		return Plugin_Handled;
 
 	return Plugin_Continue;

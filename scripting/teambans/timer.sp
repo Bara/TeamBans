@@ -2,7 +2,7 @@ public Action Timer_CheckClients(Handle timer, any userid)
 {
 	for (int i = 1; i <= MaxClients; i++)
 		if (IsClientValid(i) && g_iPlayer[i][clientReady])
-			IsAndMoveClient(i);
+			IsAndMoveClient(i, TeamBans_GetClientTeam(i));
 }
 
 public Action Timer_BanCheck(Handle timer, any userid)
@@ -44,5 +44,5 @@ public Action Timer_SQLConnect(Handle timer, any userid)
 	int client = GetClientOfUserId(userid);
 	
 	if (IsClientValid(client))
-		IsAndMoveClient(client);
+		IsAndMoveClient(client, TeamBans_GetClientTeam(client));
 }
