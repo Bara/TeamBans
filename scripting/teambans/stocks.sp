@@ -202,3 +202,20 @@ stock void SQL_CheckTables()
 	
 	g_dDB.Query(SQLCallback_Create, sQuery, _, DBPrio_High);
 }
+
+stock void MoveFile(const char[] file)
+{
+	// Taken from SourceBans -->
+	char sFile[PLATFORM_MAX_PATH];
+	BuildPath(Path_SM, sFile, sizeof(sFile), "plugins/%s.smx", file);
+	if(FileExists(sFile))
+	{
+		char sNewFile[PLATFORM_MAX_PATH];
+		BuildPath(Path_SM, sNewFile, sizeof(sNewFile), "plugins/disabled/%s.smx", file);
+		ServerCommand("sm plugins unload %s", file);
+		if(FileExists(sNewFile))
+			DeleteFile(sNewFile);
+		RenameFile(sNewFile, sFile);
+		TB_LogFile(DEBUG, "plugins/%s.smx was unloaded and moved to plugins/disabled/%s.smx", file, file);
+	} // <--
+}

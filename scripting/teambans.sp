@@ -62,6 +62,10 @@ public void OnPluginStart()
 		return;
 	}
 	
+	MoveFile("basebans");
+	MoveFile("sourcebans");
+	MoveFile("sb_bans");
+	
 	BuildPath(Path_SM, g_sReasonsPath, sizeof(g_sReasonsPath), "configs/teambans/reasons.cfg");
 	CheckReasonsFile();
 	
