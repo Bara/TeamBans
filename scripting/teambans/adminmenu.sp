@@ -137,10 +137,10 @@ public int MenuHandler_CTBansPlayerList(Menu menu, MenuAction action, int client
 			CPrintToChat(client, "%T", "Unable to target", client);
 		else if (HasClientTeamBan(iTarget))
 		{
-			if(GetClientBanTeam(iTarget) == TEAMBANS_CT)
-				CPrintToChat(client, "%T", "IsAlreadyCTBanned", client, g_sTag);
-			else if(GetClientBanTeam(iTarget) == TEAMBANS_T)
-				CPrintToChat(client, "%T", "IsAlreadyTBanned", client, g_sTag);
+			int team = GetClientBanTeam(iTarget);
+			char sTranslations[18];
+			Format(sTranslations, sizeof(sTranslations), "IsAlready%sBanned", g_sTeams[team]);
+			CPrintToChat(client, "%T", sTranslations, client, g_sTag);
 		}
 		else
 		{
@@ -174,10 +174,10 @@ public int MenuHandler_TBansPlayerList(Menu menu, MenuAction action, int client,
 			CPrintToChat(client, "%T", "Unable to target", client);
 		else if (HasClientTeamBan(iTarget))
 		{
-			if(GetClientBanTeam(iTarget) == TEAMBANS_T)
-				CPrintToChat(client, "%T", "IsAlreadyTBanned", client, g_sTag);
-			else if(GetClientBanTeam(iTarget) == TEAMBANS_CT)
-				CPrintToChat(client, "%T", "IsAlreadyCTBanned", client, g_sTag);
+			int team = GetClientBanTeam(iTarget);
+			char sTranslations[18];
+			Format(sTranslations, sizeof(sTranslations), "IsAlready%sBanned", g_sTeams[team]);
+			CPrintToChat(client, "%T", sTranslations, client, g_sTag);
 		}
 		else
 		{

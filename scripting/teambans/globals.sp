@@ -24,6 +24,13 @@ char g_sELogLevel[6][32] = {
 	"error"
 };
 
+char g_sTeams[4][TEAMBANS_TEAMNAME_SIZE] = {
+	"Unknown",
+	"Server",
+	"T",
+	"CT"
+};
+
 
 enum Data
 {

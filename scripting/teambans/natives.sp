@@ -179,20 +179,20 @@ public int Native_GetTeamName(Handle plugin, int numParams)
 		if(IsClientValid(client) && client != LANG_SERVER)
 		{
 			if(team == TEAMBANS_CT)
-				Format(sBuffer, sizeof(sBuffer), "%T", "CT", client);
+				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_CT], client);
 			else if(team == TEAMBANS_T)
-				Format(sBuffer, sizeof(sBuffer), "%T", "T", client);
+				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_T], client);
 			else if (team == TEAMBANS_SERVER)
-				Format(sBuffer, sizeof(sBuffer), "%T", "SERVER", client);
+				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_SERVER], client);
 		}
 		else
 		{
 			if(team == TEAMBANS_CT)
-				Format(sBuffer, sizeof(sBuffer), "%T", "CT", LANG_SERVER);
+				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_CT], LANG_SERVER);
 			else if(team == TEAMBANS_T)
-				Format(sBuffer, sizeof(sBuffer), "%T", "T", LANG_SERVER);
+				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_T], LANG_SERVER);
 			else if (team == TEAMBANS_SERVER)
-				Format(sBuffer, sizeof(sBuffer), "%T", "SERVER", LANG_SERVER);
+				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_SERVER], LANG_SERVER);
 		}
 		
 		SetNativeString(2, sBuffer, length);
@@ -208,11 +208,11 @@ public int Native_GetTeamNumber(Handle plugin, int numParams)
 	char sTeam[TEAMBANS_TEAMNAME_SIZE];
 	GetNativeString(1, sTeam, sizeof(sTeam));
 	
-	if(StrEqual(sTeam, "server", false))
+	if(StrEqual(sTeam, g_sTeams[TEAMBANS_SERVER], false))
 		return TEAMBANS_SERVER;
-	else if(StrEqual(sTeam, "ct", false))
+	else if(StrEqual(sTeam, g_sTeams[TEAMBANS_CT], false))
 		return TEAMBANS_CT;
-	else if(StrEqual(sTeam, "t", false))
+	else if(StrEqual(sTeam, g_sTeams[TEAMBANS_T], false))
 		return TEAMBANS_T;
 	return 0;
 }

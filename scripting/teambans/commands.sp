@@ -184,7 +184,7 @@ public Action Command_Ban(int client, int args)
  		if(GetLogLevel() >= view_as<int>(INFO))
 			TB_LogFile(INFO, "[TeamBans] (Command_SetCTBan) Admin: \"%L\" %s - Player: \"%L\" %s - Length: %d - Team: %s - Reason: %s", client, sACommunityID, target, sCommunityID, iLength, sTeam, sReason);
 		
-		// Only one team ban/person
+		// TODO: Add both team support 
 		if (iTeam == TEAMBANS_SERVER || (iTeam > TEAMBANS_SERVER && !HasClientTeamBan(target)))
 			SetTeamBan(client, target, iTeam, iLength, iLength, sReason);
 		else
@@ -264,10 +264,9 @@ public Action Command_UnBan(int client, int args)
 			DelTeamBan(client, target);
 		else
 		{
-			if(iTeam == TEAMBANS_CT)
-				CReplyToCommand(client, "%T", "IsntCTBanned", client, g_sTag);
-			else if(iTeam == TEAMBANS_T)
-				CReplyToCommand(client, "%T", "IsntTBanned", client, g_sTag);
+			char sTranslations[18];
+			Format(sTranslations, sizeof(sTranslations), "Isnt%sBanned", g_sTeams[iTeam]);
+			CReplyToCommand(client, "%T", sTranslations, client, g_sTag);
 			return Plugin_Handled;
 		}
 	}
