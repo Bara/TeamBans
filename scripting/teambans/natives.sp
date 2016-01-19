@@ -36,8 +36,6 @@ public int Native_GetClientTeam(Handle plugin, int numParams)
 	{
 		if(g_iPlayer[client][clientBanned])
 			return g_iPlayer[client][banTeam];
-		else
-			ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is not banned!", client);
 	}
 	else
 		ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is invalid!", client);
@@ -53,8 +51,6 @@ public int Native_GetClientLength(Handle plugin, int numParams)
 	{
 		if(g_iPlayer[client][clientBanned])
 			return g_iPlayer[client][banLength];
-		else
-			ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is not banned!", client);
 	}
 	else
 		ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is invalid!", client);
@@ -70,8 +66,6 @@ public int Native_GetClientTimeleft(Handle plugin, int numParams)
 	{
 		if(g_iPlayer[client][clientBanned])
 			return g_iPlayer[client][banTimeleft];
-		else
-			ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is not banned!", client);
 	}
 	else
 		ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is invalid!", client);
@@ -95,8 +89,6 @@ public int Native_GetClientReason(Handle plugin, int numParams)
 			
 			SetNativeString(2, sBuffer, length);
 		}
-		else
-			ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is not banned!", client);
 	}
 	else
 		ThrowNativeError(SP_ERROR_NATIVE, "Client (%d) is invalid!", client);
@@ -170,29 +162,28 @@ public int Native_GetTeamName(Handle plugin, int numParams)
 	int team = GetNativeCell(1);
 	int client = GetNativeCell(4);
 	
-	if(team < TEAMBANS_SERVER || team > TEAMBANS_CT)
+	if(team >= TEAMBANS_SERVER && team <= TEAMBANS_CT)
 	{
 		int length = GetNativeCell(3);
-		
-		char sBuffer[TEAMBANS_REASON_LENGTH];
+		char[] sBuffer = new char[length];
 		
 		if(IsClientValid(client) && client != LANG_SERVER)
 		{
 			if(team == TEAMBANS_CT)
-				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_CT], client);
+				Format(sBuffer, length, "%T", g_sTeams[TEAMBANS_CT], client);
 			else if(team == TEAMBANS_T)
-				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_T], client);
+				Format(sBuffer, length, "%T", g_sTeams[TEAMBANS_T], client);
 			else if (team == TEAMBANS_SERVER)
-				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_SERVER], client);
+				Format(sBuffer, length, "%T", g_sTeams[TEAMBANS_SERVER], client);
 		}
 		else
 		{
 			if(team == TEAMBANS_CT)
-				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_CT], LANG_SERVER);
+				Format(sBuffer, length, "%T", g_sTeams[TEAMBANS_CT], LANG_SERVER);
 			else if(team == TEAMBANS_T)
-				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_T], LANG_SERVER);
+				Format(sBuffer, length, "%T", g_sTeams[TEAMBANS_T], LANG_SERVER);
 			else if (team == TEAMBANS_SERVER)
-				Format(sBuffer, sizeof(sBuffer), "%T", g_sTeams[TEAMBANS_SERVER], LANG_SERVER);
+				Format(sBuffer, length, "%T", g_sTeams[TEAMBANS_SERVER], LANG_SERVER);
 		}
 		
 		SetNativeString(2, sBuffer, length);
