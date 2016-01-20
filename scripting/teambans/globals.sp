@@ -82,6 +82,14 @@ char g_sLengthPath[PLATFORM_MAX_PATH];
 KeyValues g_kvLength;
 
 // Forwards
-Handle g_hOnBan = null;
-Handle g_hOnUnban = null;
-Handle g_hOnOBan = null;
+enum eForwards
+{
+	Handle:hOnPreBan,
+	Handle:hOnPostBan,
+	Handle:hOnPreOBan,
+	Handle:hOnPostOBan,
+	Handle:hOnPreUnBan,
+	Handle:hOnPostUnban
+};
+
+int g_iForwards[eForwards];

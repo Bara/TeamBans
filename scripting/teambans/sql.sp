@@ -84,9 +84,14 @@ public void SQL_OnClientAuthorized(Database db, DBResultSet results, const char[
 					if(g_iPlayer[client][banTeam] == TEAMBANS_SERVER)
 					{
 						int iDate = GetTime();
-
-						if(g_iPlayer[client][banDate] + (g_iPlayer[client][banTimeleft] * 60) > iDate)
+						int uDate = g_iPlayer[client][banDate] + (g_iPlayer[client][banLength] * 60);
+						
+						if(uDate > iDate)
 						{
+							float fTimeleft = float((uDate - iDate) / 60);
+							int iTimeleft = RoundToCeil(fTimeleft);
+							
+							UpdateServerTimeleft(client, iTimeleft);
 							ResetVars(client);
 							KickClient(client, "%T", "BanReason", client);
 						}
@@ -253,15 +258,19 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 					
 					if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 						TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineBans) %s", sQuery);
-						
-					Call_StartForward(g_hOnOBan);
+					
+					Action result = Plugin_Continue;
+					Call_StartForward(g_iForwards[hOnPreOBan]);
 					Call_PushCell(admin);
 					Call_PushString(target);
 					Call_PushCell(team);
 					Call_PushCell(length);
 					Call_PushCell(timeleft);
 					Call_PushString(reason);
-					Call_Finish();
+					Call_Finish(result);
+
+					if(result > Plugin_Changed)
+						return;
 					
 					g_dDB.Query(SQLCallback_OBan, sQuery, _, DBPrio_High);
 					

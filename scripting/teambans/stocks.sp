@@ -219,3 +219,18 @@ stock void MoveFile(const char[] file)
 		TB_LogFile(DEBUG, "plugins/%s.smx was unloaded and moved to plugins/disabled/%s.smx", file, file);
 	} // <--
 }
+
+stock void UpdateServerTimeleft(int client, int timeleft)
+{
+	char sCommunityID[64];
+ 	if(!GetClientAuthId(client, AuthId_SteamID64, sCommunityID, sizeof(sCommunityID)))
+ 		return;
+ 	
+	char sQuery[1024];
+	Format(sQuery, sizeof(sQuery), QUERY_UPDATE_BAN, timeleft, sCommunityID, g_iPlayer[client][banID]);
+	
+	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
+		TB_LogFile(DEBUG, "[TeamBans] (UpdateServerTimeleft) %s", sQuery);
+	
+	g_dDB.Query(SQLCallback_UpdateServerTimeleft, sQuery, _, DBPrio_High);
+}

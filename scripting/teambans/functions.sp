@@ -52,14 +52,18 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 		TB_LogFile(DEBUG, "[TeamBans] (SetTeamBan) %s", sQuery);
 	
-	Call_StartForward(g_hOnBan);
+	Action result = Plugin_Continue;
+	Call_StartForward(g_iForwards[hOnPreBan]);
 	Call_PushCell(admin);
 	Call_PushCell(client);
 	Call_PushCell(team);
 	Call_PushCell(length);
 	Call_PushCell(timeleft);
 	Call_PushString(reason);
-	Call_Finish();
+	Call_Finish(result);
+
+	if(result > Plugin_Changed)
+		return;
 	
 	if(team > TEAMBANS_SERVER)
 		g_dDB.Query(SQLCallback_SetBan, sQuery, GetClientUserId(client), DBPrio_High);
@@ -128,13 +132,17 @@ void DelTeamBan(int admin, int client)
 	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 		TB_LogFile(DEBUG, "[TeamBans] (DelTeamBan) %s", sQuery);
 	
-	Call_StartForward(g_hOnUnban);
+	Action result = Plugin_Continue;
+	Call_StartForward(g_iForwards[hOnPreUnBan]);
 	Call_PushCell(admin);
 	Call_PushCell(client);
 	Call_PushCell(g_iPlayer[client][banTeam]);
 	Call_PushCell(g_iPlayer[client][banLength]);
 	Call_PushString(g_iPlayer[client][banReason]);
-	Call_Finish();
+	Call_Finish(result);
+
+	if(result > Plugin_Changed)
+		return;
 	
 	g_dDB.Query(SQLCallback_DelBan, sQuery, GetClientUserId(client), DBPrio_High);
 	
