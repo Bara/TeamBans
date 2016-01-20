@@ -95,7 +95,6 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 		}
 	}
 	
-	Action aoResult = Plugin_Continue;
 	Call_StartForward(g_iForwards[hOnPostBan]);
 	Call_PushCell(admin);
 	Call_PushCell(client);
@@ -103,10 +102,7 @@ void SetTeamBan(int admin, int client, int team, int length, int timeleft, const
 	Call_PushCell(length);
 	Call_PushCell(timeleft);
 	Call_PushString(reason);
-	Call_Finish(aoResult);
-
-	if(aoResult > Plugin_Continue)
-		return;
+	Call_Finish();
 }
 
 void DelTeamBan(int admin, int client)
@@ -177,17 +173,13 @@ void DelTeamBan(int admin, int client)
 		}
 	}
 	
-	Action aoResult = Plugin_Continue;
 	Call_StartForward(g_iForwards[hOnPostUnBan]);
 	Call_PushCell(admin);
 	Call_PushCell(client);
 	Call_PushCell(g_iPlayer[client][banTeam]);
 	Call_PushCell(g_iPlayer[client][banLength]);
 	Call_PushString(g_iPlayer[client][banReason]);
-	Call_Finish(aoResult);
-
-	if(aoResult > Plugin_Changed)
-		return;
+	Call_Finish();
 }
 
 void CheckOfflineBans(int admin, char[] target,  int team, int length, char[] reason)

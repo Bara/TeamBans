@@ -298,7 +298,6 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 						}
 					}
 					
-					Action aoResult = Plugin_Continue;
 					Call_StartForward(g_iForwards[hOnPostOBan]);
 					Call_PushCell(admin);
 					Call_PushString(target);
@@ -306,10 +305,7 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 					Call_PushCell(length);
 					Call_PushCell(timeleft);
 					Call_PushString(reason);
-					Call_Finish(aoResult);
-
-					if(aoResult > Plugin_Continue)
-						return;
+					Call_Finish();
 				}
 			}
 		}
