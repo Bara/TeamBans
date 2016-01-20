@@ -33,36 +33,80 @@ public Action Event_WeaponFire(Event event, const char[] name, bool dontBroadcas
 			char sReason[TEAMBANS_REASON_LENGTH];
 			TeamBans_GetClientReason(client, sReason, sizeof(sReason));
 			
-			PrintToChatAll("Client: %d", client);
-			PrintToChatAll("Status: %d", TeamBans_IsClientBanned(client));
-			PrintToChatAll("Team: %d", TeamBans_GetClientTeam(client));
-			PrintToChatAll("Length: %d", TeamBans_GetClientLength(client));
-			PrintToChatAll("Timeleft: %d", TeamBans_GetClientTimeleft(client));
-			PrintToChatAll("Reason: %s", sReason);
+			PrintToChat(client, "Client: %d", client);
+			PrintToChat(client, "Status: %d", TeamBans_IsClientBanned(client));
+			PrintToChat(client, "Team: %d", TeamBans_GetClientTeam(client));
+			PrintToChat(client, "Length: %d", TeamBans_GetClientLength(client));
+			PrintToChat(client, "Timeleft: %d", TeamBans_GetClientTimeleft(client));
+			PrintToChat(client, "Reason: %s", sReason);
 		}
 		else
 		{
-			PrintToChatAll("Client: %d", client);
-			PrintToChatAll("Status: %d", TeamBans_IsClientBanned(client));
+			PrintToChat(client, "Client: %d", client);
+			PrintToChat(client, "Status: %d", TeamBans_IsClientBanned(client));
 		}
 	}
 }
 
-public void TeamBans_OnClientBan(int admin, int client, int team, int length, int timeleft, const char[] reason)
+public void TeamBans_OnClientBan_Pre(int admin, int client, int team, int length, int timeleft, const char[] reason)
 {
-	PrintToChatAll("Admin: %d", admin);
-	PrintToChatAll("Client: %d", client);
-	PrintToChatAll("Team: %d", team);
-	PrintToChatAll("Length: %d", length);
-	PrintToChatAll("Timeleft: %d", timeleft);
-	PrintToChatAll("Reason: %s", reason);
+	PrintToChat(admin, "TeamBans_OnClientBan_Pre");
+	PrintToChat(admin, "Admin: %d", admin);
+	PrintToChat(admin, "Client: %d", client);
+	PrintToChat(admin, "Team: %d", team);
+	PrintToChat(admin, "Length: %d", length);
+	PrintToChat(admin, "Timeleft: %d", timeleft);
+	PrintToChat(admin, "Reason: %s", reason);
 }
 
-public void TeamBans_OnClientUnban(int admin, int client, int team, int length, const char[] reason)
+public void TeamBans_OnClientBan_Post(int admin, int client, int team, int length, int timeleft, const char[] reason)
 {
-	PrintToChatAll("Admin: %d", admin);
-	PrintToChatAll("Client: %d", client);
-	PrintToChatAll("Team: %d", team);
-	PrintToChatAll("Length: %d", length);
-	PrintToChatAll("Reason: %s", reason);
+	PrintToChat(admin, "TeamBans_OnClientBan_Post");
+	PrintToChat(admin, "Admin: %d", admin);
+	PrintToChat(admin, "Client: %d", client);
+	PrintToChat(admin, "Team: %d", team);
+	PrintToChat(admin, "Length: %d", length);
+	PrintToChat(admin, "Timeleft: %d", timeleft);
+	PrintToChat(admin, "Reason: %s", reason);
+}
+
+public void TeamBans_OnClientOfflineBan_Pre(int admin, const char[] communityid, int team, int length, int timeleft, const char[] reason)
+{
+	PrintToChat(admin, "TeamBans_OnClientOfflineBan_Pre");
+	PrintToChat(admin, "Admin: %d", admin);
+	PrintToChat(admin, "Spieler CommunityID: %s", communityid);
+	PrintToChat(admin, "Team: %d", team);
+	PrintToChat(admin, "Length: %d", length);
+	PrintToChat(admin, "Timeleft: %d", timeleft);
+	PrintToChat(admin, "Reason: %s", reason);
+}
+
+public void TeamBans_OnClientOfflineBan_Post(int admin, const char[] communityid, int team, int length, int timeleft, const char[] reason)
+{
+	PrintToChat(admin, "TeamBans_OnClientOfflineBan_Post");
+	PrintToChat(admin, "Admin: %d", admin);
+	PrintToChat(admin, "Spieler CommunityID: %s", communityid);
+	PrintToChat(admin, "Team: %d", team);
+	PrintToChat(admin, "Length: %d", length);
+	PrintToChat(admin, "Reason: %s", reason);
+}
+
+public void TeamBans_OnClientUnban_Pre(int admin, int client, int team, int length, const char[] reason)
+{
+	PrintToChat(admin, "TeamBans_OnClientUnban_Pre");
+	PrintToChat(admin, "Admin: %d", admin);
+	PrintToChat(admin, "Client: %d", client);
+	PrintToChat(admin, "Team: %d", team);
+	PrintToChat(admin, "Length: %d", length);
+	PrintToChat(admin, "Reason: %s", reason);
+}
+
+public void TeamBans_OnClientUnban_Post(int admin, int client, int team, int length, const char[] reason)
+{
+	PrintToChat(admin, "TeamBans_OnClientUnban_Post");
+	PrintToChat(admin, "Admin: %d", admin);
+	PrintToChat(admin, "Client: %d", client);
+	PrintToChat(admin, "Team: %d", team);
+	PrintToChat(admin, "Length: %d", length);
+	PrintToChat(admin, "Reason: %s", reason);
 }
