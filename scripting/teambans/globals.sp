@@ -89,7 +89,7 @@ enum eForwards
 	Handle:hOnPreOBan,
 	Handle:hOnPostOBan,
 	Handle:hOnPreUnBan,
-	Handle:hOnPostUnban
+	Handle:hOnPostUnBan
 };
 
 int g_iForwards[eForwards];

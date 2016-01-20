@@ -259,7 +259,7 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 					if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 						TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineBans) %s", sQuery);
 					
-					Action result = Plugin_Continue;
+					Action aResult = Plugin_Continue;
 					Call_StartForward(g_iForwards[hOnPreOBan]);
 					Call_PushCell(admin);
 					Call_PushString(target);
@@ -267,9 +267,9 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 					Call_PushCell(length);
 					Call_PushCell(timeleft);
 					Call_PushString(reason);
-					Call_Finish(result);
+					Call_Finish(aResult);
 
-					if(result > Plugin_Changed)
+					if(aResult > Plugin_Changed)
 						return;
 					
 					g_dDB.Query(SQLCallback_OBan, sQuery, _, DBPrio_High);
@@ -297,6 +297,19 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 							}
 						}
 					}
+					
+					Action aoResult = Plugin_Continue;
+					Call_StartForward(g_iForwards[hOnPostOBan]);
+					Call_PushCell(admin);
+					Call_PushString(target);
+					Call_PushCell(team);
+					Call_PushCell(length);
+					Call_PushCell(timeleft);
+					Call_PushString(reason);
+					Call_Finish(aoResult);
+
+					if(aoResult > Plugin_Continue)
+						return;
 				}
 			}
 		}
