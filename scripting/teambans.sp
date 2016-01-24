@@ -5,9 +5,7 @@
 	- Add native for offline ban
 	- Add native for offline unban
 	
-	- Alle Team Bans zuruecksetzen, wenn jemand vom Server gebannt wird
-	- Sollte ein Spieler von ein Team gebannt worden sein, und dann vom anderen Team ebenfalls gebannt wird, so werden alle aktiven Bans aufgehoben
-	  und in ein Server Ban verwandelt
+	- (TODO: Need test) Sollte ein Spieler von ein Team gebannt worden sein, und dann vom anderen Team ebenfalls gebannt wird, so wird der letzte Ban in ein Server Ban verwandelt
 
 */
 

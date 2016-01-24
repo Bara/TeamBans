@@ -187,21 +187,16 @@ public Action Command_Ban(int client, int args)
 		// TODO: Add both team support 
 		if (iTeam == TEAMBANS_SERVER || (iTeam > TEAMBANS_SERVER && !HasClientTeamBan(target)))
 			SetTeamBan(client, target, iTeam, iLength, iLength, sReason);
-		else
+		else if(HasClientTeamBan(target))
 		{
 			if(GetClientBanTeam(target) == iTeam)
 			{
-				if (iTeam == TEAMBANS_CT)
-					CReplyToCommand(client, "%T", "IsAlreadyCTBanned", client, g_sTag);
-				else if(iTeam == TEAMBANS_T)
-					CReplyToCommand(client, "%T", "IsAlreadyTBanned", client, g_sTag);
+				CReplyToCommand(client, "%T", "IsAlready%sBanned", sTeam, client, g_sTag);
 				return Plugin_Handled;
 			}
 			
-			if (iTeam == TEAMBANS_CT)
-				CReplyToCommand(client, "%T", "IsAlreadyTBanned", client, g_sTag);
-			else if(iTeam == TEAMBANS_T)
-				CReplyToCommand(client, "%T", "IsAlreadyCTBanned", client, g_sTag);
+			iTeam = TEAMBANS_SERVER;
+			SetTeamBan(client, target, iTeam, iLength, iLength, sReason);
 			return Plugin_Handled;
 		}
 	}
