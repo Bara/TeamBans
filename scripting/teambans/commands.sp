@@ -276,7 +276,10 @@ public Action Command_OBan(int client, int args)
 		return Plugin_Handled;
 	}
 	
-	if (args < 1)
+	if(client == 0 || !IsClientValid(client))
+		client = 0;
+	
+	if (args < 2 && IsClientInGame(client))
 	{
 		CReplyToCommand(client, "%T", "OBanSyntax", client, g_sTag);
 		return Plugin_Handled;
@@ -292,22 +295,23 @@ public Action Command_OBan(int client, int args)
 	
 	int iTeam = TeamBans_GetTeamNumberByName(team);
 	
-	// Get length
-	char length[12];
-	GetCmdArg(3, length, sizeof(length));
-	
 	int iLength;
 	
-	if(args == 1)
+	// Get length
+	if(args <= 2)
 	{
 		char sDLength[12];
 		g_iCvar[defaultBanLength].GetString(sDLength, sizeof(sDLength));
 		iLength = StringToInt(sDLength);
 	}
 	else
+	{
+		char length[12];
+		GetCmdArg(3, length, sizeof(length));
 		iLength = StringToInt(length);
+	}
 	
-	if(iLength < 0)
+	if(iLength < 0 && IsClientInGame(client))
 	{
 		CReplyToCommand(client, "%T", "OBanSyntax", client, g_sTag);
 		return Plugin_Handled;
@@ -329,7 +333,7 @@ public Action Command_OBan(int client, int args)
 			Format(sReason, sizeof(sReason), "%s %s", sReason , sBuffer);
 		}
 	}
-
+	
 	CheckOfflineBans(client, target, iTeam, iLength, sReason);
 	return Plugin_Continue;
 }

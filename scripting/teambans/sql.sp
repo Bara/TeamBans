@@ -196,16 +196,16 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 {
 	ResetPack(pack);
 	
-	int admin = GetClientOfUserId(ReadPackCell(pack));
+	int aid = ReadPackCell(pack);
+	int admin;
+	if(aid != 0 && IsClientValid(GetClientOfUserId(aid)))
+		admin = GetClientOfUserId(aid);
 	char target[18];
 	ReadPackString(pack, target, sizeof(target));
 	int team = ReadPackCell(pack);
 	int length = ReadPackCell(pack);
 	char reason[128];
 	ReadPackString(pack, reason, sizeof(reason));
-	
-	if(IsClientValid(admin))
-		return;
 	
 	if(db == null || strlen(error) > 0)
 	{
@@ -215,52 +215,64 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 	}
 	else
 	{
-		if(results.HasResults)
+		char sCommunityID[64];
+		
+		if(admin > 0)
 		{
-			char sCommunityID[64];
-			
 			if(!GetClientAuthId(admin, AuthId_SteamID64, sCommunityID, sizeof(sCommunityID)))
 				return;
-			
+		}
+		else
+			Format(sCommunityID, sizeof(sCommunityID), "0");
+		
+		if(results.HasResults)
+		{
 			while(results.FetchRow())
 			{
 				if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 					TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineBans) %N - %s - %s", target, sCommunityID, target);
 				
-				int bActive = results.FetchInt(2);
-				int bTeam = results.FetchInt(5);
+				int bActive = results.FetchInt(0);
+				int bTeam = results.FetchInt(1);
 				
 				if(bActive && bTeam == team)
 				{
 					char sTeam[TEAMBANS_TEAMNAME_SIZE];
 					TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam));
-					CReplyToCommand(admin, "IsAlready%sBanned", sTeam, admin, g_sTag);
+					char sBuffer[32];
+					Format(sBuffer, sizeof(sBuffer), "IsAlready%sBanned", sTeam);
+					if(admin > 0 && IsClientValid(admin))
+						CPrintToChat(admin, "%T", sBuffer, admin, g_sTag);
+					return;
 				}
 				else if (bActive && (bTeam > TEAMBANS_SERVER && bTeam != team))
 				{
 					team = TEAMBANS_SERVER;
 					SetOfflineBan(admin, sCommunityID, target, team, length, length, reason);
+					return;
 				}
 				else
+				{
 					SetOfflineBan(admin, sCommunityID, target, team, length, length, reason);
+					return;
+				}
 			}
 		}
+		SetOfflineBan(admin, sCommunityID, target, team, length, length, reason);
+		return;
 	}
 }
 
 stock void SetOfflineBan(int admin, const char[] adminid, const char[] target, int team, int length, int timeleft, const char[] reason)
 {
 	char sEAdmin[MAX_NAME_LENGTH], sAdmin[MAX_NAME_LENGTH];
-	char sEName[MAX_NAME_LENGTH], sName[MAX_NAME_LENGTH];
 	
-	Format(sEName, sizeof(sEName), "no name (offline ban)");
-	GetClientName(admin, sEAdmin, sizeof(sEAdmin));
+	if(admin > 0 && IsClientValid(admin))
+		GetClientName(admin, sEAdmin, sizeof(sEAdmin));
 	
 	g_dDB.Escape(sEAdmin, sAdmin, sizeof(sAdmin));
-	g_dDB.Escape(sEName, sName, sizeof(sName));
-	
 	char sQuery[1024];
-	Format(sQuery, sizeof(sQuery), "INSERT INTO `teambans` (`playerid`, `playername`, `date`, `length`, `timeleft`, `team`, `active`, `reason`, `adminid`, `adminname`) VALUES ('%s', '%s', UNIX_TIMESTAMP(), '%d', '%d', '%d', '1', '%s', '%s', '%s');", target, sName, length, timeleft, team, reason, adminid, sAdmin);
+	Format(sQuery, sizeof(sQuery), "INSERT INTO `teambans` (`playerid`, `playername`, `date`, `length`, `timeleft`, `team`, `active`, `reason`, `adminid`, `adminname`) VALUES ('%s', 'Offline Ban', UNIX_TIMESTAMP(), '%d', '%d', '%d', '1', '%s', '%s', '%s');", target, length, timeleft, team, reason, adminid, sAdmin);
 	
 	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 		TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineBans) %s", sQuery);

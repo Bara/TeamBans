@@ -185,7 +185,9 @@ void DelTeamBan(int admin, int client)
 void CheckOfflineBans(int admin, char[] target,  int team, int length, char[] reason)
 {
 	char sQuery[2048];
-	Format(sQuery, sizeof(sQuery), QUERY_SELECT_BAN, target);
+	Format(sQuery, sizeof(sQuery), QUERY_OFF_SELECT_BAN, target);
+	
+	PrintToChat(admin, "%s", sQuery);
 	
 	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
 		TB_LogFile(DEBUG, "[TeamBans] (CheckOfflineBans) %s", sQuery);
@@ -194,7 +196,10 @@ void CheckOfflineBans(int admin, char[] target,  int team, int length, char[] re
 	{
 		DataPack pack = new DataPack();
 		
-		pack.WriteCell(GetClientUserId(admin));
+		if(admin != 0 && IsClientValid(admin))
+			pack.WriteCell(GetClientUserId(admin));
+		else
+			pack.WriteCell(admin);
 		pack.WriteString(target);
 		pack.WriteCell(team);
 		pack.WriteCell(length);

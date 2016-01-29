@@ -2,6 +2,7 @@
 #define GetLogLevel() g_iCvar[logLevel].IntValue
 
 #define QUERY_SELECT_BAN "SELECT length, timeleft, active, reason, id, team, date FROM teambans WHERE playerid = '%s' AND uadminid IS NULL AND active = '1' ORDER BY id DESC LIMIT 1;"
+#define QUERY_OFF_SELECT_BAN "SELECT active, team FROM teambans WHERE playerid = '%s' AND active = '1' ORDER BY id DESC LIMIT 1;"
 #define QUERY_DELETE_BAN "UPDATE `teambans` SET `timeleft` = '0', `active` = '0', `uadminid` = '%s', `uadminname` = '%s' WHERE `playerid` = '%s' AND `uadminid` IS NULL AND `active` = '1' AND `id` = '%d';"
 #define QUERY_UPDATE_BAN "UPDATE `teambans` SET `timeleft` = '%d' WHERE `playerid`= '%s' AND `uadminid` IS NULL AND `active` = '1' AND `length` > '0' AND `timeleft` > '0' AND `id` = '%d';"
 
@@ -16,9 +17,9 @@ enum ELOG_LEVEL
 }
 
 char g_sELogLevel[6][32] = {
-	"default",
 	"trace",
 	"debug",
+	"default",
 	"info",
 	"warn",
 	"error"
