@@ -9,6 +9,6 @@
 
 ### Installation
  * Upload both config files (configs/teambans/reasons.cfg + configs/teambans/reasons.cfg)
- * Upload translation file (CSS: translations/teambans.css.phrases.txt and CSGO: translations/teambans.csgo.phrases.txt)
+ * Upload translation file (translations/teambans.phrases.txt)
  * Add config entry "teambans" in configs/databases.cfg
  * Upload binary file (plugins/teambans.smx) or compile for yourself

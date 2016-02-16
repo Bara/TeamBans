@@ -146,12 +146,7 @@ public int Native_SetClientBan(Handle plugin, int numParams)
 			
 			Format(sTranslation, sizeof(sTranslation), "IsAlready%sBanned", sTeam);
 			Format(sBuffer, sizeof(sBuffer), "%T", sTranslation, admin);
-			
-			if(GetEngineVersion() == Engine_CSS)
-				MC_RemoveTags(sBuffer, sizeof(sBuffer));
-			else if(GetEngineVersion() == Engine_CSGO)
-				C_RemoveTags(sBuffer, sizeof(sBuffer));
-			
+			C_RemoveTags(sBuffer, sizeof(sBuffer));
 			ThrowNativeError(SP_ERROR_NATIVE, sBuffer);
 			
 		}
