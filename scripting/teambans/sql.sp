@@ -230,7 +230,7 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 			while(results.FetchRow())
 			{
 				if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
-					TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineBans) %N - %s - %s", target, sCommunityID, target);
+					TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineBans) %s - %s - %s", target, sCommunityID, target);
 				
 				int bActive = results.FetchInt(0);
 				int bTeam = results.FetchInt(1);
@@ -263,65 +263,64 @@ public void SQL_CheckOfflineBans(Database db, DBResultSet results, const char[] 
 	}
 }
 
-stock void SetOfflineBan(int admin, const char[] adminid, const char[] target, int team, int length, int timeleft, const char[] reason)
+public void SQL_CheckOfflineUnBan(Database db, DBResultSet results, const char[] error, any pack)
 {
-	char sEAdmin[MAX_NAME_LENGTH], sAdmin[MAX_NAME_LENGTH];
+	ResetPack(pack);
 	
-	if(admin > 0 && IsClientValid(admin))
-		GetClientName(admin, sEAdmin, sizeof(sEAdmin));
+	int aid = ReadPackCell(pack);
+	int admin;
+	if(aid != 0 && IsClientValid(GetClientOfUserId(aid)))
+		admin = GetClientOfUserId(aid);
+	char target[18];
+	ReadPackString(pack, target, sizeof(target));
+	int team = ReadPackCell(pack);
+	char reason[128];
+	ReadPackString(pack, reason, sizeof(reason));
 	
-	g_dDB.Escape(sEAdmin, sAdmin, sizeof(sAdmin));
-	char sQuery[1024];
-	Format(sQuery, sizeof(sQuery), "INSERT INTO `teambans` (`playerid`, `playername`, `date`, `length`, `timeleft`, `team`, `active`, `reason`, `adminid`, `adminname`) VALUES ('%s', 'Offline Ban', UNIX_TIMESTAMP(), '%d', '%d', '%d', '1', '%s', '%s', '%s');", target, length, timeleft, team, reason, adminid, sAdmin);
-	
-	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
-		TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineBans) %s", sQuery);
-	
-	Action aResult = Plugin_Continue;
-	Call_StartForward(g_iForwards[hOnPreOBan]);
-	Call_PushCell(admin);
-	Call_PushString(target);
-	Call_PushCell(team);
-	Call_PushCell(length);
-	Call_PushCell(timeleft);
-	Call_PushString(reason);
-	Call_Finish(aResult);
-
-	if(aResult > Plugin_Changed)
-		return;
-	
-	g_dDB.Query(SQLCallback_OBan, sQuery, _, DBPrio_High);
-	
-	for (int i = 1; i <= MaxClients; i++)
+	if(db == null || strlen(error) > 0)
 	{
-		if (IsClientValid(i))
+		if(GetLogLevel() >= view_as<int>(ERROR))
+			TB_LogFile(ERROR, "[TeamBans] (SQL_CheckOfflineUnBan) Query failed: %s", error);
+		return;
+	}
+	else
+	{
+		char sCommunityID[64];
+		
+		if(admin > 0)
 		{
-			char sTeam[TEAMBANS_TEAMNAME_SIZE];
-			TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam), i);
-			
-			if(team > TEAMBANS_SERVER)
+			if(!GetClientAuthId(admin, AuthId_SteamID64, sCommunityID, sizeof(sCommunityID)))
+				return;
+		}
+		else
+			Format(sCommunityID, sizeof(sCommunityID), "0");
+		
+		if(results.HasResults)
+		{
+			while(results.FetchRow())
 			{
-				if(length > 0)
-					CShowActivityEx(admin, g_sTag, "%T", "OnTeamOBan", i, target, sTeam, length, reason);
-				else if(length == 0)
-					CShowActivityEx(admin, g_sTag, "%T", "OnTeamOBanPerma", i, target, sTeam, reason);
-			}
-			else if(team == TEAMBANS_SERVER)
-			{
-				if(length > 0)
-					CShowActivityEx(admin, g_sTag, "%T", "OnServerOBan", i, target, sTeam, length, reason);
-				else if(length == 0)
-					CShowActivityEx(admin, g_sTag, "%T", "OnServerOBanPerma", i, target, sTeam, reason);
+				if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
+					TB_LogFile(DEBUG, "[TeamBans] (SQL_CheckOfflineUnBan) %s - %s - %s", target, sCommunityID, target);
+				
+				int bActive = results.FetchInt(0);
+				int bTeam = results.FetchInt(1);
+				int banid = results.FetchInt(2);
+				int length = results.FetchInt(3);
+				
+				if(bActive && bTeam == team)
+					SetOfflineUnBan(banid, admin, sCommunityID, target, team, length, reason);
+				else
+				{
+					char sTeam[TEAMBANS_TEAMNAME_SIZE];
+					TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam));
+					char sBuffer[32];
+					Format(sBuffer, sizeof(sBuffer), "Isnt%sBanned", sTeam);
+					if(admin > 0 && IsClientValid(admin))
+						CPrintToChat(admin, "%T", sBuffer, admin, g_sTag);
+					return;
+				}
 			}
 		}
+		return;
 	}
-	
-	Call_StartForward(g_iForwards[hOnPostOBan]);
-	Call_PushCell(admin);
-	Call_PushString(target);
-	Call_PushCell(team);
-	Call_PushCell(length);
-	Call_PushCell(timeleft);
-	Call_PushString(reason);
-	Call_Finish();
 }

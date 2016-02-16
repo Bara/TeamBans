@@ -208,3 +208,141 @@ void CheckOfflineBans(int admin, char[] target,  int team, int length, char[] re
 		g_dDB.Query(SQL_CheckOfflineBans, sQuery, pack, DBPrio_High);
 	}
 }
+
+void CheckOfflineUnBan(int admin, char[] target,  int team, char[] reason)
+{
+	char sQuery[2048];
+	Format(sQuery, sizeof(sQuery), QUERY_OFF_SELECT_BAN, target);
+	
+	PrintToChat(admin, "%s", sQuery);
+	
+	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
+		TB_LogFile(DEBUG, "[TeamBans] (CheckOfflineUnBan) %s", sQuery);
+	
+	if(g_dDB != null)
+	{
+		DataPack pack = new DataPack();
+		
+		if(admin != 0 && IsClientValid(admin))
+			pack.WriteCell(GetClientUserId(admin));
+		else
+			pack.WriteCell(admin);
+		pack.WriteString(target);
+		pack.WriteCell(team);
+		pack.WriteString(reason);
+		
+		g_dDB.Query(SQL_CheckOfflineUnBan, sQuery, pack, DBPrio_High);
+	}
+}
+
+stock void SetOfflineBan(int admin, const char[] adminid, const char[] target, int team, int length, int timeleft, const char[] reason)
+{
+	char sEAdmin[MAX_NAME_LENGTH], sAdmin[MAX_NAME_LENGTH];
+	
+	if(admin > 0 && IsClientValid(admin))
+		GetClientName(admin, sEAdmin, sizeof(sEAdmin));
+	
+	g_dDB.Escape(sEAdmin, sAdmin, sizeof(sAdmin));
+	char sQuery[1024];
+	Format(sQuery, sizeof(sQuery), "INSERT INTO `teambans` (`playerid`, `playername`, `date`, `length`, `timeleft`, `team`, `active`, `reason`, `adminid`, `adminname`) VALUES ('%s', 'Offline Ban', UNIX_TIMESTAMP(), '%d', '%d', '%d', '1', '%s', '%s', '%s');", target, length, timeleft, team, reason, adminid, sAdmin);
+	
+	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
+		TB_LogFile(DEBUG, "[TeamBans] (SetOfflineBan) %s", sQuery);
+	
+	Action aResult = Plugin_Continue;
+	Call_StartForward(g_iForwards[hOnPreOBan]);
+	Call_PushCell(admin);
+	Call_PushString(target);
+	Call_PushCell(team);
+	Call_PushCell(length);
+	Call_PushCell(timeleft);
+	Call_PushString(reason);
+	Call_Finish(aResult);
+
+	if(aResult > Plugin_Changed)
+		return;
+	
+	g_dDB.Query(SQLCallback_OBan, sQuery, _, DBPrio_High);
+	
+	for (int i = 1; i <= MaxClients; i++)
+	{
+		if (IsClientValid(i))
+		{
+			char sTeam[TEAMBANS_TEAMNAME_SIZE];
+			TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam), i);
+			
+			if(team > TEAMBANS_SERVER)
+			{
+				if(length > 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnTeamOBan", i, target, sTeam, length, reason);
+				else if(length == 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnTeamOBanPerma", i, target, sTeam, reason);
+			}
+			else if(team == TEAMBANS_SERVER)
+			{
+				if(length > 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnServerOBan", i, target, sTeam, length, reason);
+				else if(length == 0)
+					CShowActivityEx(admin, g_sTag, "%T", "OnServerOBanPerma", i, target, sTeam, reason);
+			}
+		}
+	}
+	
+	Call_StartForward(g_iForwards[hOnPostOBan]);
+	Call_PushCell(admin);
+	Call_PushString(target);
+	Call_PushCell(team);
+	Call_PushCell(length);
+	Call_PushCell(timeleft);
+	Call_PushString(reason);
+	Call_Finish();
+}
+
+stock void SetOfflineUnBan(int banid, int admin, const char[] adminid, const char[] target, int team, int length, const char[] reason)
+{
+	char sEAdmin[MAX_NAME_LENGTH], sAdmin[MAX_NAME_LENGTH];
+	
+	if(admin > 0 && IsClientValid(admin))
+		GetClientName(admin, sEAdmin, sizeof(sEAdmin));
+	
+	g_dDB.Escape(sEAdmin, sAdmin, sizeof(sAdmin));
+	char sQuery[1024];
+	Format(sQuery, sizeof(sQuery), "UPDATE `teambans` SET `timeleft` = '0', `active` = '0', `uadminid` = '%s', `uadminname` = '%s' WHERE `playerid` = '%s' AND `uadminid` IS NULL AND `active` = '1' AND `id` = '%d';", adminid, sAdmin, target, banid);
+	
+	if(IsDebug() && GetLogLevel() >= view_as<int>(DEBUG))
+		TB_LogFile(DEBUG, "[TeamBans] (SetOfflineUnBan) %s", sQuery);
+	
+	Action aResult = Plugin_Continue;
+	Call_StartForward(g_iForwards[hOnPreOUnBan]);
+	Call_PushCell(admin);
+	Call_PushString(target);
+	Call_PushCell(team);
+	Call_PushString(reason);
+	Call_Finish(aResult);
+
+	if(aResult > Plugin_Changed)
+		return;
+	
+	g_dDB.Query(SQLCallback_OUnBan, sQuery, _, DBPrio_High);
+	
+	for (int i = 1; i <= MaxClients; i++)
+	{
+		if (IsClientValid(i))
+		{
+			char sTeam[TEAMBANS_TEAMNAME_SIZE];
+			TeamBans_GetTeamNameByNumber(team, sTeam, sizeof(sTeam), i);
+			
+			if(team > TEAMBANS_SERVER)
+				CShowActivityEx(admin, g_sTag, "%T", "OnTeamOUnBan", i, target, sTeam, length, reason);
+			else if(team == TEAMBANS_SERVER)
+				CShowActivityEx(admin, g_sTag, "%T", "OnServerOUnBan", i, target, sTeam, length, reason);
+		}
+	}
+	
+	Call_StartForward(g_iForwards[hOnPostOUnBan]);
+	Call_PushCell(admin);
+	Call_PushString(target);
+	Call_PushCell(team);
+	Call_PushString(reason);
+	Call_Finish();
+}

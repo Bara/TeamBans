@@ -279,7 +279,7 @@ public Action Command_OBan(int client, int args)
 	if(client == 0 || !IsClientValid(client))
 		client = 0;
 	
-	if (args < 2 && IsClientInGame(client))
+	if (args < 2)
 	{
 		CReplyToCommand(client, "%T", "OBanSyntax", client, g_sTag);
 		return Plugin_Handled;
@@ -335,5 +335,52 @@ public Action Command_OBan(int client, int args)
 	}
 	
 	CheckOfflineBans(client, target, iTeam, iLength, sReason);
+	return Plugin_Continue;
+}
+
+public Action Command_OUnBan(int client, int args)
+{
+	if(!g_iCvar[enableTBan].BoolValue)
+	{
+		CReplyToCommand(client, "%T", "CommandDisabled", client, g_sTag);
+		return Plugin_Handled;
+	}
+	
+	if(client == 0 || !IsClientValid(client))
+		client = 0;
+	
+	if (args < 2)
+	{
+		CReplyToCommand(client, "%T", "OUnBanSyntax", client, g_sTag);
+		return Plugin_Handled;
+	}
+	
+	// Get communityid
+	char target[18];
+	GetCmdArg(1, target, sizeof(target));
+	
+	// Get team
+	char team[TEAMBANS_TEAMNAME_SIZE];
+	GetCmdArg(2, team, sizeof(team));
+	int iTeam = TeamBans_GetTeamNumberByName(team);
+	
+	// Get Reason
+	char sReason[128], sBuffer[128];
+	if(args <= 2)
+	{
+		char sTBuffer[32];
+		g_iCvar[defaultBanReason].GetString(sTBuffer, sizeof(sTBuffer));
+		Format(sReason, sizeof(sReason), "%T", sTBuffer, LANG_SERVER);
+	}
+	else 
+	{
+		for (int i = 3; i <= args; i++)
+		{
+			GetCmdArg(i, sBuffer, sizeof(sBuffer));
+			Format(sReason, sizeof(sReason), "%s %s", sReason , sBuffer);
+		}
+	}
+	
+	CheckOfflineUnBan(client, target, iTeam, sReason);
 	return Plugin_Continue;
 }

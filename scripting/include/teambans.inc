@@ -31,10 +31,12 @@ native int TeamBans_GetTeamNumberByName(char[] team);
 
 forward void TeamBans_OnClientBan_Pre(int admin, int client, int team, int length, int timeleft, const char[] reason);
 forward void TeamBans_OnClientBan_Post(int admin, int client, int team, int length, int timeleft, const char[] reason);
-forward void TeamBans_OnClientOfflineBan_Pre(int admin, const char[] communityid ,int team, int length, int timeleft, const char[] reason);
-forward void TeamBans_OnClientOfflineBan_Post(int admin, const char[] communityid ,int team, int length, int timeleft, const char[] reason);
+forward void TeamBans_OnClientOfflineBan_Pre(int admin, const char[] communityid, int team, int length, int timeleft, const char[] reason);
+forward void TeamBans_OnClientOfflineBan_Post(int admin, const char[] communityid, int team, int length, int timeleft, const char[] reason);
 forward void TeamBans_OnClientUnban_Pre(int admin, int client, int team, int length, const char[] reason);
 forward void TeamBans_OnClientUnban_Post(int admin, int client, int team, int length, const char[] reason);
+forward void TeamBans_OnClientOfflineUnban_Pre(int admin, const char[] communityid, int team, const char[] reason);
+forward void TeamBans_OnClientOfflineUnban_Post(int admin, const char[] communityid, int team, const char[] reason);
 
 stock bool IsTeamBansLoaded()
 {

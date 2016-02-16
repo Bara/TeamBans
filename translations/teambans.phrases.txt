@@ -78,6 +78,13 @@
 		"en"		"{1} Target player is not {darkred}T Banned{lightgreen}!"
 		"de"		"{1} Der ausgewählte Spieler hat kein {darkred}T Ban{lightgreen}!"
 	}
+	
+	"IsntServerBanned"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Target player is not {darkred}Server Banned{lightgreen}!"
+		"de"		"{1} Der ausgewählte Spieler hat kein {darkred}Server Ban{lightgreen}!"
+	}
 
 	"TeamBansList"
 	{
@@ -182,7 +189,21 @@
 		"en"		"{darkred}{3} Ban {lightgreen}of {darkred}{1} {lightgreen}was removed! (Length was {darkred}permanently {lightgreen}with the reason: {darkred}{2}{lightgreen})"
 		"de"		"Der {darkred}{3} Ban {lightgreen}von {darkred}{1} {lightgreen}wurde entfernt! (Länge war {darkred}permanent {lightgreen}mit dem Grund: {darkred}{2}{lightgreen})"
 	}
-
+	
+	"OnTeamOUnBan"
+	{
+		"#format"	"{1:s},{2:s},{3:d},{4:s}"
+		"en"		"{lightgreen}The ID {darkred}{1} {lightgreen}is no longer banned from the {darkred}{2} team{lightgreen}! (Length is {darkred}{3} minutes {lightgreen}with the reason: {darkred}{4}{lightgreen})"
+		"de"		"{lightgreen}Die ID {darkred}{1} {lightgreen}ist nicht länger vom {darkred}{2} Team {lightgreen}gebannt! (Länge beträgt {darkred}{3} Minuten {lightgreen}mit dem Grund: {darkred}{4}{lightgreen})"
+	}
+	
+	"OnServerOUnBan"
+	{
+		"#format"	"{1:s},{2:s},{3:d},{4:s}"
+		"en"		"{lightgreen}The ID {darkred}{1} {lightgreen}is no longer banned from the {darkred}server{lightgreen}! (Length is {darkred}{3} minutes {lightgreen}with the reason: {darkred}{4}{lightgreen})"
+		"de"		"{lightgreen}Die ID {darkred}{{1} {lightgreen}ist nicht länger vom {darkred}Server {lightgreen}gebannt! (Länge beträgt {darkred}{3} Minuten {lightgreen}mit dem Grund: {darkred}{4}{lightgreen})"
+	}
+	
 	"TeamBansInfo"
 	{
 		"#format"	"{1:s},{2:N},{3:d},{4:d},{5:s},{6:s}"
@@ -271,5 +292,12 @@
 		"#format"	"{1:s}"
 		"en"		"{1} Usage: {darkred}sm_oban <communityid> <team> <length>"
 		"de"		"{1} Benutzung: {darkred}sm_oban <communityid> <team> <laenge>"
+	}
+	
+	"OUnBanSyntax"
+	{
+		"#format"	"{1:s}"
+		"en"		"{1} Usage: {darkred}sm_ounban <communityid> <team>"
+		"de"		"{1} Benutzung: {darkred}sm_ounban <communityid> <Team>"
 	}
 }

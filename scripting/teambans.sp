@@ -57,10 +57,10 @@ public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max
 
 public void OnPluginStart()
 {
-	if(GetEngineVersion() != Engine_CSS && GetEngineVersion() != Engine_CSGO)
+	if(GetEngineVersion() != Engine_CSGO)
 	{
-		TB_LogFile(ERROR, "Only CS:S/CS:GO support");
-		SetFailState("Only CS:S/CS:GO support");
+		TB_LogFile(ERROR, "Only CS:GO support");
+		SetFailState("Only CS:GO support");
 		return;
 	}
 	
@@ -84,15 +84,13 @@ public void OnPluginStart()
 	RegAdminCmd("sm_oban",  Command_OBan,  ADMFLAG_BAN, "Offline");
 	
 	RegAdminCmd("sm_unban", Command_UnBan, ADMFLAG_UNBAN, "Online");
+	RegAdminCmd("sm_ounban", Command_OUnBan, ADMFLAG_UNBAN, "Offline");
 	
 	AddCommandListener(Command_JoinTeam, "jointeam");
 	
 	HookEvent("player_spawn", Event_PlayerSpawn);
 	
-	if(GetEngineVersion() == Engine_CSGO)
-		LoadTranslations("teambans.csgo.phrases");
-	else if(GetEngineVersion() == Engine_CSS)
-		LoadTranslations("teambans.css.phrases");
+	LoadTranslations("teambans.phrases");
 
 	LoadTranslations("common.phrases");
 	

@@ -22,6 +22,8 @@ void CreateForwards()
 	g_iForwards[hOnPostOBan] = CreateGlobalForward("TeamBans_OnClientOfflineBan_Post", ET_Ignore, Param_Cell, Param_String, Param_Cell, Param_Cell, Param_Cell, Param_String);
 	g_iForwards[hOnPreUnBan] = CreateGlobalForward("TeamBans_OnClientUnban_Pre", ET_Hook, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
 	g_iForwards[hOnPostUnBan] = CreateGlobalForward("TeamBans_OnClientUnban_Post", ET_Ignore, Param_Cell, Param_Cell, Param_Cell, Param_Cell, Param_String);
+	g_iForwards[hOnPreOUnBan] = CreateGlobalForward("TeamBans_OnClientOfflineUnban_Pre", ET_Hook, Param_Cell, Param_String, Param_Cell, Param_String);
+	g_iForwards[hOnPostOUnBan] = CreateGlobalForward("TeamBans_OnClientOfflineUnban_Post", ET_Ignore, Param_Cell, Param_String, Param_Cell, Param_String);
 }
 
 public int Native_IsClientBanned(Handle plugin, int numParams)
