@@ -1,6 +1,6 @@
 [CS:GO] TeamBans
 ---
- - [TeamBans on Git.TF](http://git.tf/Bara/TeamBans)
+ - [TeamBans on GitHub](https://github.com/Bara20/TeamBans)
  - [TeamBans on AlliedModders](https://forums.alliedmods.net/showthread.php?t=270761)
 
 ### Requirement
